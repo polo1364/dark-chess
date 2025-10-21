@@ -5,15 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <title>象棋暗棋（翻翻棋）— 人機對戰</title>
 <style>
-
-  @font-face{
-    font-family: 'DarkChessCJK';
-    src: url(data:font/woff2;base64,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) format('woff2');
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
-  }
-
   :root{
     --bg:#f6f3ee;
     --panel:#ffffffcc;
@@ -30,16 +21,12 @@
   html,body{height:100%}
   body{
     margin:0;
-    font-family: "Noto Sans TC","PingFang TC","Microsoft JhengHei","Heiti TC","Hiragino Sans GB","Hiragino Kaku Gothic ProN","Meiryo","Source Han Sans TC","Source Han Sans SC","Apple LiGothic","Segoe UI",system-ui,-apple-system,sans-serif;
+    font-family: "Noto Sans TC","PingFang TC","Microsoft JhengHei","Heiti TC","Source Han Sans TC","Source Han Sans SC","Hiragino Sans GB","Meiryo","Segoe UI",system-ui,-apple-system,sans-serif;
     background: radial-gradient(1000px 700px at 50% -10%, #ffffff, var(--bg));
     color:#222;
     display:flex; justify-content:center; align-items:stretch;
   }
-  .app{
-    width: min(96vw, 540px);
-    padding:12px;
-    display:flex; flex-direction:column; gap:10px;
-  }
+  .app{ width: min(96vw, 540px); padding:12px; display:flex; flex-direction:column; gap:10px; }
   .bar{
     display:flex; gap:8px; align-items:center; justify-content:space-between;
     background: var(--panel); backdrop-filter: blur(6px);
@@ -47,97 +34,73 @@
     flex-wrap:wrap;
   }
   .bar .group{display:flex; gap:8px; align-items:center; flex-wrap:wrap}
-  select,button{
-    border:1px solid #00000022; background:#fff; border-radius:10px; padding:8px 12px; font-size:14px; cursor:pointer;
-  }
+  select,button{ border:1px solid #00000022; background:#fff; border-radius:10px; padding:8px 12px; font-size:14px; cursor:pointer; }
   button.primary{background:linear-gradient(#fff,#f2f2f2); border-color:#00000030}
   button.ghost{background:transparent}
-  .names{
-    display:grid; grid-template-columns: 1fr auto; gap:8px; align-items:center;
-    background: var(--panel); padding:10px; border-radius:12px; box-shadow: 0 8px 20px #00000014, inset 0 0 0 1px #00000010;
-  }
-  .player{
-    display:grid; grid-template-columns: 1fr auto; gap:8px; align-items:center;
-  }
-  .name{
-    font-weight:700; letter-spacing:.5px;
-  }
-  .captured{
-    display:flex; gap:4px; flex-wrap:wrap; justify-content:flex-end;
-    min-height:36px;
-  }
-  .cap{
-    width:28px; height:28px; border-radius:50%;
-    display:flex; align-items:center; justify-content:center; font-size:14px; font-weight:700;
-    border:2px solid #00000022; box-shadow: 0 1px 0 #fff inset;
-    background: #fff;
-    position:relative;
-  }
-  .cap.red{color:var(--red)}
-  .cap.black{color:var(--black)}
-  .cap small{
-    position:absolute; right:-6px; bottom:-6px; background:#000; color:#fff; font-size:10px; border-radius:10px; padding:0 4px;
-  }
+  .names{ display:grid; grid-template-columns: 1fr auto; gap:8px; align-items:center;
+    background: var(--panel); padding:10px; border-radius:12px; box-shadow: 0 8px 20px #00000014, inset 0 0 0 1px #00000010; }
+  .player{ display:grid; grid-template-columns: 1fr auto; gap:8px; align-items:center; }
+  .name{ font-weight:700; letter-spacing:.5px; }
+  .captured{ display:flex; gap:4px; flex-wrap:wrap; justify-content:flex-end; min-height:36px; }
+  .cap{ width:28px; height:28px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+    font-size:14px; font-weight:700; border:2px solid #00000022; box-shadow: 0 1px 0 #fff inset; background: #fff; position:relative; }
+  .cap.red{color:var(--red)} .cap.black{color:var(--black)}
+  .cap small{ position:absolute; right:-6px; bottom:-6px; background:#000; color:#fff; font-size:10px; border-radius:10px; padding:0 4px; }
   .boardWrap{
-    background:
-      radial-gradient(1200px 800px at 50% -20%, #fff0, #00000010),
-      linear-gradient(115deg, var(--wood1), var(--wood2));
+    background: radial-gradient(1200px 800px at 50% -20%, #fff0, #00000010), linear-gradient(115deg, var(--wood1), var(--wood2));
     border-radius:16px; padding:14px; box-shadow: 0 20px 40px #00000025, inset 0 0 0 2px #00000012;
   }
-  .board{
-    --cols:8; --rows:4;
-    display:grid; grid-template-columns: repeat(var(--cols), 1fr);
-    aspect-ratio: 8/4; gap:6px;
-    position:relative;
-  }
+  .board{ --cols:8; --rows:4; display:grid; grid-template-columns: repeat(var(--cols), 1fr); aspect-ratio: 8/4; gap:6px; position:relative; }
   .cell{
-    background:linear-gradient(#f8e7cc,#edd3a9);
-    border-radius:10px; border:2px solid var(--grid);
+    background:linear-gradient(#f8e7cc,#edd3a9); border-radius:10px; border:2px solid var(--grid);
     position:relative; box-shadow: inset 0 0 0 1px #00000020, inset 0 0 10px #00000015;
     display:flex; align-items:center; justify-content:center; user-select:none;
   }
   .coord{position:absolute; font-size:10px; color:#00000055; top:4px; left:6px}
-  .piece{position:relative; font-family: 'DarkChessCJK',  "Noto Sans TC","PingFang TC","Microsoft JhengHei","Heiti TC","Hiragino Sans GB","Hiragino Kaku Gothic ProN","Meiryo","Source Han Sans TC","Source Han Sans SC","Apple LiGothic","Segoe UI",system-ui,-apple-system,sans-serif;
+  .piece{
+    position:relative;
     width: calc(100% - 10px); height: calc(100% - 10px);
     border-radius:999px; display:flex; align-items:center; justify-content:center;
     font-weight:900; font-size: clamp(16px, 4.3vw, 28px);
     background: radial-gradient(circle at 35% 30%, #fff, #fff2 30%, #00000008 60%), linear-gradient(#fff7,#fff2);
     border:3px solid var(--gold); box-shadow: 0 6px 14px #00000045, inset 0 0 0 1px #fff8;
-    letter-spacing:1px;
-    transition: transform .12s ease;
+    letter-spacing:1px; transition: transform .12s ease;
+    font-family: "Noto Sans TC","PingFang TC","Microsoft JhengHei","Heiti TC","Source Han Sans TC","Source Han Sans SC","Hiragino Sans GB","Meiryo","Segoe UI",system-ui,-apple-system,sans-serif;
   }
-  .piece.red{color:var(--red)}
-  .piece.black{color:var(--black)}
-  .piece.back{
-    background: radial-gradient(circle at 35% 30%, #ffe497, #e6b455 60%), linear-gradient(#fff6,#0000);
-    border-color:#a06a00;
-  }
-  .piece.back::after{
-    content:"暗"; font-family: inherit; color:#4b2e00; text-shadow:0 1px 0 #fff8; font-weight:900;
-  }
+  .piece.red{color:var(--red)} .piece.black{color:var(--black)}
+  .piece.back{ background: radial-gradient(circle at 35% 30%, #ffe497, #e6b455 60%), linear-gradient(#fff6,#0000); border-color:#a06a00; }
+  .piece.back::after{ content:"暗"; color:#4b2e00; text-shadow:0 1px 0 #fff8; font-weight:900; }
   .piece.revealed{transform: translateY(-1px)}
-  .piece-label{position:relative; z-index:3; font-weight:900; font-size:1.2em; line-height:1; pointer-events:none; text-shadow:0 1px 0 #fff8, 0 0 2px #0001; font-family:'DarkChessCJK', inherit;}
-  .piece-abbr{position:absolute; right:6px; bottom:6px; font-size:.72em; font-weight:800; opacity:.85; background:#fff8; padding:1px 5px; border-radius:8px; border:1px solid #0001; z-index:4; pointer-events:none;}
-  
   .sel{outline: 4px solid var(--sel); outline-offset: -4px}
   .hint{box-shadow: 0 0 0 3px var(--hint) inset, 0 0 0 2px #fff}
   .target{box-shadow: 0 0 0 3px var(--warn) inset, 0 0 0 2px #fff}
-  .footer{
-    display:flex; gap:10px; align-items:center; justify-content:space-between; opacity:.85; font-size:12px;
+
+  .piece-label{
+    position:relative; z-index:3; font-weight:900; font-size:1.35em; line-height:1;
+    pointer-events:none;
+    text-shadow:0 1px 0 #fff, 0 0 2px #0004, 0 2px 4px #0002;
+    -webkit-text-stroke: 1px #fff;
+    font-family:'DarkChessCJK', inherit;
   }
+  .piece-abbr{position:absolute; right:6px; bottom:6px; font-size:.72em; font-weight:800; opacity:.85; background:#fff8; padding:1px 5px; border-radius:8px; border:1px solid #0001; z-index:4; pointer-events:none;}
+
+  .footer{ display:flex; gap:10px; align-items:center; justify-content:space-between; opacity:.85; font-size:12px; }
   .badge{padding:4px 8px; border-radius:999px; background:#00000008; border:1px solid #00000014}
-  .modal{
-    position: fixed; inset:0; display:none; place-items:center; background:#00000055; z-index:50;
-  }
+  .modal{ position: fixed; inset:0; display:none; place-items:center; background:#00000055; z-index:50; }
   .modal.show{display:grid}
-  .card{
-    width:min(92vw,520px); background:#fff; border-radius:16px; padding:16px; box-shadow: 0 30px 60px #00000055;
-  }
+  .card{ width:min(92vw,520px); background:#fff; border-radius:16px; padding:16px; box-shadow: 0 30px 60px #00000055; }
   .card h3{margin:4px 0 10px}
   .row{display:flex; gap:8px; flex-wrap:wrap}
   .right{margin-left:auto}
   .tiny{font-size:12px; opacity:.8}
   .link{color:#0b84ff; text-decoration:underline; cursor:pointer}
+
+  /* AI overlay */
+  .ai-overlay{position:fixed; inset:0; background:rgba(0,0,0,.28); display:flex; align-items:center; justify-content:center; z-index:99; backdrop-filter: blur(2px);}
+  .ai-panel{background:#fff; border-radius:16px; padding:16px 18px; box-shadow:0 20px 50px rgba(0,0,0,.35); display:flex; align-items:center; gap:12px; border:1px solid #0001}
+  .spinner{width:22px; height:22px; border-radius:50%; border:3px solid #e5e5e5; border-top-color:#0b84ff; animation:spin 1s linear infinite}
+  @keyframes spin {to{transform:rotate(360deg)}}
+  .ai-text{font-weight:800; letter-spacing:.5px}
 </style>
 </head>
 <body>
@@ -159,7 +122,6 @@
     </div>
     <div class="group">
       <button class="ghost" id="btnRule">規則</button>
-      <button class="ghost" id="btnEndChain" style="display:none">結束連吃</button>
     </div>
   </div>
 
@@ -188,6 +150,14 @@
     <div class="tiny">50 手無吃無翻自動和局｜點棋選擇／再點取消</div>
   </div>
 
+  <!-- AI overlay -->
+  <div id="aiOverlay" class="ai-overlay" style="display:none">
+    <div class="ai-panel">
+      <div class="spinner"></div>
+      <div class="ai-text">AI 思考中…</div>
+    </div>
+  </div>
+
 </div>
 
 <!-- 規則與先手 modal -->
@@ -195,7 +165,7 @@
   <div class="card">
     <h3>遊戲說明</h3>
     <p style="margin:.3em 0 1em">
-      先手由擲骰或指定決定；先手第一步必須翻任一暗棋，翻出的顏色即為先手持色。之後輪流移動或吃子。
+      先手由擲骰或指定決定；先手第一步必須翻任一暗棋，翻出的顏色即為先手持色。之後輪流行動。
     </p>
     <ul style="margin:.2em 0 1em; line-height:1.6">
       <li>明棋只能上下左右移動一格；<b>炮</b>不吃時也只移動一格。</li>
@@ -203,7 +173,7 @@
       <li><b>特例：</b>兵可以吃將；將<b>不能</b>吃兵。</li>
       <li><b>炮吃子：</b>需同行同列，中間隔<b>正好一枚</b>任意棋，且不受階級限制。</li>
       <li>不可吃未翻開的棋；需先翻開。</li>
-      <li>吃子後若仍可吃，會高亮可續吃目標，可按「結束連吃」結束本回合。</li>
+      <li><b>每回合僅能執行一次</b>：翻子、移動一步或吃一枚（<b>不啟用連吃</b>）。</li>
       <li>連續 50 手未發生吃子或翻子判和。</li>
     </ul>
     <div class="row">
@@ -217,40 +187,35 @@
 
 <script>
 (() => {
-  // --- 型別與常數 ---
+  // --- 常數與字典 ---
   const ROWS = 4, COLS = 8;
   const TYPES = ["G","A","E","R","N","C","P"];
-  const CN = {
-    R:{G:"帥",A:"仕",E:"相",R:"車",N:"馬",C:"炮",P:"兵"},
-    B:{G:"將",A:"士",E:"象",R:"車",N:"馬",C:"炮",P:"卒"},
-  };
+  const CN = { R:{G:"帥",A:"仕",E:"相",R:"車",N:"馬",C:"炮",P:"兵"}, B:{G:"將",A:"士",E:"象",R:"車",N:"馬",C:"炮",P:"卒"} };
   const RANK = {G:7, A:6, E:5, R:4, N:3, C:2, P:1};
   const PIECE_VALUES = {G:1000, A:320, E:260, R:520, N:360, C:420, P:110};
-  const MAX_QUIET = 50; // 50手和局
+  const MAX_QUIET = 50;
 
   // --- 狀態 ---
   let state;
   let ui = {};
-  let humanBottom = true;     // 玩家是否在下方
-  let gameMode = 'hva';       // 'hva' 人機, 'pvp' 雙人
-  let aiLevel = 1;            // 0,1,2
-  let chainCtx = null;        // {r,c, color} 若進行連吃，鎖定同一子
-  let colorsAssigned = false; // 是否已決定雙方顏色（首翻）
+  let humanBottom = true;
+  let gameMode = 'hva'; // 'hva' 人機, 'pvp' 雙人
+  let aiLevel = 1;
+  let colorsAssigned = false;
 
   // --- 初始化 ---
   function newGame(){
-    // 建立32子：紅黑各16
+    // 建立32子：紅黑各16（**展開加入**，避免出現陣列包陣列）
     const bag = [];
     ["R","B"].forEach(color=>{
       bag.push(...mk(color,"G",1));
-bag.push(...mk(color,"A",2));
-bag.push(...mk(color,"E",2));
-bag.push(...mk(color,"R",2));
-bag.push(...mk(color,"N",2));
-bag.push(...mk(color,"C",2));
-bag.push(...mk(color,"P",5));
-});
-    // 洗牌佈局
+      bag.push(...mk(color,"A",2));
+      bag.push(...mk(color,"E",2));
+      bag.push(...mk(color,"R",2));
+      bag.push(...mk(color,"N",2));
+      bag.push(...mk(color,"C",2));
+      bag.push(...mk(color,"P",5));
+    });
     shuffle(bag);
     const board = Array.from({length:ROWS},()=>Array(COLS).fill(null));
     let idx = 0;
@@ -261,8 +226,8 @@ bag.push(...mk(color,"P",5));
     }
     state = {
       board,
-      turn: null,    // 'R' or 'B' once assigned; before first flip = null
-      bottomColor: 'R', // 預設把人放在下方，實際首翻後會對齊
+      turn: null,
+      bottomColor: 'R',
       topColor: 'B',
       selected: null,
       history: [],
@@ -270,23 +235,17 @@ bag.push(...mk(color,"P",5));
       quiet: 0,
       winner: null,
     };
-    chainCtx = null;
     colorsAssigned = false;
     renderAll(true);
     showModal(true);
     setTurnInfo("先手未決定：先手第一步需翻子");
+    showThinking(false);
   }
 
   function mk(color, type, count){
     return Array.from({length:count}, ()=>({color, type, id:color+type+Math.random().toString(36).slice(2,7)}));
   }
-
-  function shuffle(a){
-    for(let i=a.length-1;i>0;i--){
-      const j = Math.floor(Math.random()*(i+1));
-      [a[i],a[j]]=[a[j],a[i]];
-    }
-  }
+  function shuffle(a){ for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } }
 
   // --- UI 建構 ---
   function buildUI(){
@@ -299,7 +258,6 @@ bag.push(...mk(color,"P",5));
     ui.btnNew = document.getElementById('btnNew');
     ui.btnToss = document.getElementById('btnToss');
     ui.btnRule = document.getElementById('btnRule');
-    ui.btnEndChain = document.getElementById('btnEndChain');
     ui.modal = document.getElementById('modal');
     ui.mStartHuman = document.getElementById('mStartHuman');
     ui.mStartAI = document.getElementById('mStartAI');
@@ -317,17 +275,14 @@ bag.push(...mk(color,"P",5));
     ui.mRoll.onclick = ()=> decideFirst(Math.random()<0.5 ? 'human' : 'ai');
     ui.modeSel.onchange = (e)=> { gameMode = e.target.value; renderAll(); if (gameMode==='hva'){ui.topName.textContent='電腦'; ui.botName.textContent='玩家 1'} else {ui.topName.textContent='玩家 2'; ui.botName.textContent='玩家 1'} }
     ui.levelSel.onchange = (e)=> { aiLevel = +e.target.value }
-    ui.btnEndChain.onclick = endChain;
 
-    // 建立格子
+    // 建格
     ui.board.innerHTML = '';
     for (let r=0;r<ROWS;r++){
       for (let c=0;c<COLS;c++){
         const cell = document.createElement('div');
-        cell.className = 'cell';
-        cell.dataset.r = r; cell.dataset.c = c;
-        const coord = document.createElement('div');
-        coord.className='coord'; coord.textContent = `${r},${c}`;
+        cell.className = 'cell'; cell.dataset.r=r; cell.dataset.c=c;
+        const coord = document.createElement('div'); coord.className='coord'; coord.textContent = `${r},${c}`;
         cell.appendChild(coord);
         cell.addEventListener('click', onCellClick);
         ui.board.appendChild(cell);
@@ -336,121 +291,63 @@ bag.push(...mk(color,"P",5));
   }
 
   function showModal(v){ ui.modal.classList.toggle('show', !!v) }
+  function showThinking(v){ const o=document.getElementById('aiOverlay'); if(!o) return; o.style.display = v? 'flex':'none'; }
 
   function decideFirst(who){
-    // who: 'human' or 'ai'
     showModal(false);
-    if (gameMode==='hva'){
-      humanBottom = true; // 人放下方
-      ui.topName.textContent = '電腦';
-      ui.botName.textContent = '玩家 1';
-    }else{
-      ui.topName.textContent = '玩家 2';
-      ui.botName.textContent = '玩家 1';
-    }
-    // 還沒分配顏色; 只是先決定誰先翻
-    state.turn = (who==='human') ? null : null; // 邏輯：turn=null 代表尚未分配顏色，但仍需知道「誰先走」
-    state.firstMover = who; // 記錄誰先行動（翻子）
+    if (gameMode==='hva'){ humanBottom = true; ui.topName.textContent = '電腦'; ui.botName.textContent = '玩家 1'; }
+    else { ui.topName.textContent = '玩家 2'; ui.botName.textContent = '玩家 1'; }
+    state.firstMover = who;
     setTurnInfo( (who==='human') ? '你先手：請翻任一暗棋決定持色' : 'AI先手：AI 正在翻子…');
     colorsAssigned = false;
-    // 若 AI 先手，立即讓 AI 翻子
-    if (who==='ai' && gameMode==='hva'){
-      setTimeout(()=> {
-        aiActFirstFlip();
-      }, 350);
-    }
+    if (who==='ai' && gameMode==='hva'){ setTimeout(()=> aiActFirstFlip(), 300); }
   }
 
-  // --- 事件處理 ---
   function onCellClick(e){
     if (state.winner) return;
-    if (gameMode==='hva' && currentSideToMoveIsAI()) return; // AI 行動中，忽略點擊
-    const r = +e.currentTarget.dataset.r;
-    const c = +e.currentTarget.dataset.c;
+    if (gameMode==='hva' && currentSideToMoveIsAI()) return;
+    const r = +e.currentTarget.dataset.r, c = +e.currentTarget.dataset.c;
     const piece = state.board[r][c];
 
-    // 若在連吃中，只允許點"可續吃"目標或按結束連吃
-    if (chainCtx){
-      const cand = legalCapturesFrom(chainCtx.r, chainCtx.c, chainCtx.color);
-      const found = cand.find(m=> m.to.r===r && m.to.c===c);
-      if (found){
-        // 續吃
-        doCapture(chainCtx.r, chainCtx.c, r, c, true);
-        return;
-      }else{
-        // 其他點擊當作取消，不動作
-        return;
-      }
-    }
-
-    // 尚未分配顏色（首翻）
+    // 首翻決色
     if (!colorsAssigned){
       if (!piece) return;
-      if (piece && !piece.revealed){
-        firstFlipAssignColors(r,c, 'human');
+      if (!piece.revealed){
+        firstFlipAssignColors(r,c,'human');
         return;
-      } else {
-        setTurnInfo('請先翻任一暗棋決定持色');
-        return;
-      }
+      } else { setTurnInfo('請先翻任一暗棋決定持色'); return; }
     }
 
-    // 正常流程：選擇 / 取消 / 移動 / 吃子 / 翻子
     const sel = state.selected;
 
+    // 點暗棋 → 翻子（單步回合）
     if (piece && !piece.revealed){
-      // 點到暗棋：若是當前方，允許翻子（翻子不分陣營）
-      doFlip(r,c);
-      return;
+      doFlip(r,c); return;
     }
 
     if (!sel){
-      // 尚未選擇：只能選擇己方明棋
       if (piece && piece.revealed && isMyTurnPiece(piece)){
-        state.selected = {r,c};
-        renderAll();
+        state.selected = {r,c}; renderAll(); return;
       }
       return;
     } else {
-      // 已選取：再次點同格＝取消
-      if (sel.r===r && sel.c===c){
-        state.selected = null; renderAll(); return;
-      }
-      // 嘗試移動或吃子
+      if (sel.r===r && sel.c===c){ state.selected=null; renderAll(); return; }
       const fromP = state.board[sel.r][sel.c];
-      if (!fromP || !fromP.revealed) { state.selected=null; renderAll(); return; }
+      if (!fromP || !fromP.revealed){ state.selected=null; renderAll(); return; }
 
-      // 空格 → 嘗試移動一格
+      // 空格 → 移動一步
       if (!piece){
-        if (isAdjacent(sel.r, sel.c, r, c) && (!isCannon(fromP) || isAdjacent(sel.r, sel.c, r, c))){
-          doMove(sel.r, sel.c, r, c);
-        } else {
-          blinkInfo('不能移動到該位置');
-        }
+        if (isAdjacent(sel.r, sel.c, r, c)){ doMove(sel.r, sel.c, r, c); } else { blinkInfo('只能移動一格'); }
         return;
       }
-
-      // 有敵棋 → 嘗試吃
-      if (piece && piece.revealed && piece.color !== fromP.color){
-        if (canCapture(sel.r, sel.c, r, c)){
-          doCapture(sel.r, sel.c, r, c, false);
-        } else {
-          blinkInfo('此路不通（階級或炮隔屏規則不符）');
-        }
+      // 敵棋 → 嘗試吃（單步回合）
+      if (piece && piece.revealed && piece.color!==fromP.color){
+        if (canCapture(sel.r, sel.c, r, c)){ doCapture(sel.r, sel.c, r, c, false); } else { blinkInfo('此路不通'); }
         return;
       }
-
-      // 有己棋 → 切換選擇
-      if (piece && piece.color===fromP.color && piece.revealed){
-        state.selected = {r,c}; renderAll(); return;
-      }
+      // 己棋 → 切換選擇
+      if (piece && piece.color===fromP.color && piece.revealed){ state.selected={r,c}; renderAll(); return; }
     }
-  }
-
-  function endChain(){
-    chainCtx = null;
-    ui.btnEndChain.style.display = 'none';
-    nextTurn();
   }
 
   function currentSideToMoveIsAI(){
@@ -458,45 +355,28 @@ bag.push(...mk(color,"P",5));
     const mover = getMover();
     return (mover==='ai');
   }
-
   function getMover(){
-    // 回合的行動者（在顏色未分配前，用 firstMover）
     if (!colorsAssigned) return state.firstMover || 'human';
-    if (gameMode==='pvp') return 'human'; // 雙人同機，行動者皆為人
-    // 人機：判斷當前顏色對應人/AI
-    const turnColor = state.turn; // 'R' or 'B'
-    // 人在下
+    if (gameMode==='pvp') return 'human';
+    const turnColor = state.turn;
     const humanColor = state.bottomColor;
     return (turnColor===humanColor) ? 'human' : 'ai';
   }
 
   // --- 首翻 / 翻子 ---
   function aiActFirstFlip(){
-    // AI 先手時：隨機翻一顆暗棋
     const darks = darkSquares();
     const pick = darks[Math.floor(Math.random()*darks.length)];
     firstFlipAssignColors(pick.r, pick.c, 'ai');
   }
-
-  function darkSquares(){
-    const arr = [];
-    for (let r=0;r<ROWS;r++) for(let c=0;c<COLS;c++){
-      const p = state.board[r][c]; if (p && !p.revealed) arr.push({r,c});
-    }
-    return arr;
-  }
-
+  function darkSquares(){ const arr=[]; for(let r=0;r<ROWS;r++) for(let c=0;c<COLS;c++){ const p=state.board[r][c]; if(p && !p.revealed) arr.push({r,c}); } return arr; }
   function firstFlipAssignColors(r,c, who){
-    // 翻開該子，並依其顏色分配雙方陣營；該翻子消除50手計數；之後由對手行動
-    const p = state.board[r][c];
-    if (!p || p.revealed) return;
-    p.revealed = true;
-    colorsAssigned = true;
+    const p = state.board[r][c]; if(!p || p.revealed) return;
+    p.revealed = true; colorsAssigned = true;
     state.bottomColor = (who==='human') ? p.color : (p.color==='R'?'B':'R');
-    state.topColor    = (state.bottomColor==='R'?'B':'R');
-    state.turn = (p.color==='R'?'B':'R'); // 翻子後輪到對方行動
-    state.selected = null;
-    state.quiet = 0;
+    state.topColor = (state.bottomColor==='R'?'B':'R');
+    state.turn = (p.color==='R'?'B':'R'); // 翻子後換對手
+    state.selected = null; state.quiet = 0;
     pushHistory({kind:'flip', r,c, piece:p});
     renderAll();
 
@@ -505,313 +385,91 @@ bag.push(...mk(color,"P",5));
       : `AI 翻到【${p.color==='R'?'紅':'黑'}${CN[p.color==='R'?'R':'B'][p.type]}】→ 你持【${state.bottomColor==='R'?'紅':'黑'}】；輪到你`;
     setTurnInfo(msg);
 
-    // 若輪到 AI，讓 AI 行動
-    if (currentSideToMoveIsAI()){
-      setTimeout(aiMove, 200);
-    }
+    if (currentSideToMoveIsAI()){ setTimeout(aiMove, 220); showThinking(true); }
   }
 
   function doFlip(r,c){
-    const p = state.board[r][c];
-    if (!p || p.revealed) return;
-    p.revealed = true;
-    state.quiet = 0;
-    pushHistory({kind:'flip', r,c, piece:p});
-    // 翻子不改變回合顏色（暗棋翻子視為該方一步）
+    const p = state.board[r][c]; if(!p || p.revealed) return;
+    p.revealed = true; state.quiet = 0; pushHistory({kind:'flip', r,c, piece:p});
     setTurnInfo(`${sideLabel(state.turn)} 翻開了【${p.color==='R'?'紅':'黑'}${CN[p.color==='R'?'R':'B'][p.type]}】`);
-    renderAll();
-    nextTurn();
+    renderAll(); nextTurn();
   }
 
-  function sideLabel(colorOrNull){
-    if (!colorsAssigned) return (state.firstMover==='human'?'你':'AI');
-    const mover = getMover();
-    return mover==='human' ? '你' : (gameMode==='hva'?'AI':'對手');
-  }
+  function sideLabel(){ const mover = getMover(); return mover==='human' ? '你' : (gameMode==='hva'?'AI':'對手'); }
 
   // --- 移動 / 吃子 ---
-  function isAdjacent(r1,c1,r2,c2){
-    return Math.abs(r1-r2) + Math.abs(c1-c2) === 1;
-  }
+  function isAdjacent(r1,c1,r2,c2){ return Math.abs(r1-r2) + Math.abs(c1-c2) === 1; }
   function isCannon(p){ return p?.type==='C' }
-
   function betweenCount(r1,c1,r2,c2){
-    // 僅處理同行同列
     if (r1!==r2 && c1!==c2) return Infinity;
     let cnt=0;
-    if (r1===r2){
-      const [a,b] = c1<c2 ? [c1,c2] : [c2,c1];
-      for (let x=a+1;x<b;x++) if (state.board[r1][x]) cnt++;
-    } else {
-      const [a,b] = r1<r2 ? [r1,r2] : [r2,r1];
-      for (let y=a+1;y<b;y++) if (state.board[y][c1]) cnt++;
-    }
+    if (r1===r2){ const [a,b] = c1<c2 ? [c1,c2] : [c2,c1]; for (let x=a+1;x<b;x++) if (state.board[r1][x]) cnt++; }
+    else { const [a,b] = r1<r2 ? [r1,r2] : [r2,r1]; for (let y=a+1;y<b;y++) if (state.board[y][c1]) cnt++; }
     return cnt;
   }
-
   function canCapture(r1,c1,r2,c2){
     const a = state.board[r1][c1], b = state.board[r2][c2];
-    if (!a || !b || !a.revealed || !b.revealed) return false;
-    if (a.color===b.color) return false;
-
-    if (isCannon(a)){
-      // 炮吃：同行同列，且中間恰一子
-      if (r1!==r2 && c1!==c2) return false;
-      const cnt = betweenCount(r1,c1,r2,c2);
-      return cnt===1;
-    } else {
-      // 一般吃：必須相鄰
-      if (!isAdjacent(r1,c1,r2,c2)) return false;
-      // 兵吃將，將不能吃兵
-      if (a.type==='P' && b.type==='G') return true;
-      if (a.type==='G' && b.type==='P') return false;
-      return RANK[a.type] >= RANK[b.type];
-    }
+    if (!a || !b || !a.revealed || !b.revealed || a.color===b.color) return false;
+    if (isCannon(a)){ if (r1!==r2 && c1!==c2) return false; return betweenCount(r1,c1,r2,c2)===1; }
+    if (!isAdjacent(r1,c1,r2,c2)) return false;
+    if (a.type==='P' && b.type==='G') return true;
+    if (a.type==='G' && b.type==='P') return false;
+    return RANK[a.type] >= RANK[b.type];
   }
-
   function doMove(r1,c1,r2,c2){
-    const a = state.board[r1][c1];
-    if (!a) return;
-    if (!isAdjacent(r1,c1,r2,c2)) return;
-    if (state.board[r2][c2]) return; // 目標需為空
-    // 移動
-    state.board[r2][c2] = {...a, r:r2, c:c2};
-    state.board[r1][c1] = null;
-    state.selected = null;
-    state.quiet++;
-    pushHistory({kind:'move', from:{r:r1,c:c1}, to:{r:r2,c:c2}, piece:state.board[r2][c2]});
-    renderAll();
-    nextTurn();
+    const a = state.board[r1][c1]; if(!a) return;
+    if (!isAdjacent(r1,c1,r2,c2)) return; if (state.board[r2][c2]) return;
+    state.board[r2][c2] = {...a, r:r2, c:c2}; state.board[r1][c1] = null;
+    state.selected = null; state.quiet++; pushHistory({kind:'move', from:{r:r1,c:c1}, to:{r:r2,c:c2}, piece:state.board[r2][c2]});
+    renderAll(); nextTurn();
   }
-
-  function doCapture(r1,c1,r2,c2, isChain, actor='human'){
-    const a = state.board[r1][c1], b = state.board[r2][c2];
-    if (!a || !b) return;
+  function doCapture(r1,c1,r2,c2){
+    const a = state.board[r1][c1], b = state.board[r2][c2]; if(!a||!b) return;
     if (!canCapture(r1,c1,r2,c2)) return;
-
-    // 記錄被吃
     const taken = {...b};
-    // 移動到對方格
-    state.board[r2][c2] = {...a, r:r2, c:c2};
-    state.board[r1][c1] = null;
-
-    // 加入吃子區
+    state.board[r2][c2] = {...a, r:r2, c:c2}; state.board[r1][c1] = null;
     (taken.color==='R' ? state.capturedR : state.capturedB).push(taken);
-
-    state.selected = null;
-    state.quiet = 0;
-    pushHistory({kind:'capture', from:{r:r1,c:c1}, to:{r:r2,c:c2}, piece:state.board[r2][c2], taken});
+    state.selected = null; state.quiet = 0; pushHistory({kind:'capture', from:{r:r1,c:c1}, to:{r:r2,c:c2}, piece:state.board[r2][c2], taken});
     renderAll();
-
-    // 連吃檢查（同一子）
-    const more = legalCapturesFrom(r2,c2, state.board[r2][c2].color);
-    if (more.length>0){
-      if (actor==='ai'){
-        // AI 自動連吃：每次選擇價值最高的目標，直到不能吃
-        ui.btnEndChain.style.display = 'none';
-        let safety = 0;
-        let curR = r2, curC = c2;
-        while (safety++ < 16){
-          const opts = legalCapturesFrom(curR, curC, state.board[curR][curC].color);
-          if (opts.length===0) break;
-          // 挑最高價值的吃法
-          let best = null, bestVal = -1e9;
-          for (const m of opts){
-            const tgt = state.board[m.to.r][m.to.c];
-            const val = (tgt && tgt.type) ? PIECE_VALUES[tgt.type] : 0;
-            if (val>bestVal){ bestVal=val; best=m; }
-          }
-          if (!best) break;
-          // 執行下一段連吃（遞迴以重用記錄/動畫）
-          doCapture(curR, curC, best.to.r, best.to.c, true, 'ai');
-          // 更新當前座標
-          curR = best.to.r; curC = best.to.c;
-          // 若上一層已結束回合，停止
-          if (state.turn === (state.bottomColor==='R'?'B':'R')) break;
-        }
-        chainCtx = null;
-        nextTurn();
-      } else {
-        chainCtx = {r:r2, c:c2, color: state.board[r2][c2].color};
-        ui.btnEndChain.style.display = 'inline-block';
-        highlightTargets(more.map(m=>m.to));
-        setTurnInfo('可連吃：點擊高亮目標或按「結束連吃」結束回合');
-      }
-    } else {
-      chainCtx = null;
-      ui.btnEndChain.style.display = 'none';
-      nextTurn();
-    }
-  }
-
-  function legalCapturesFrom(r,c,color){
-    const res = [];
-    const dirs = [[1,0],[-1,0],[0,1],[0,-1]];
-    const a = state.board[r][c]; if (!a || a.color!==color) return res;
-    // 一般子：四鄰若能吃
-    if (!isCannon(a)){
-      for(const [dr,dc] of dirs){
-        const nr=r+dr, nc=c+dc;
-        if (!inBoard(nr,nc)) continue;
-        const b = state.board[nr][nc];
-        if (b && b.revealed && b.color!==color && canCapture(r,c,nr,nc)){
-          res.push({from:{r,c}, to:{r:nr,c:nc}});
-        }
-      }
-    } else {
-      // 炮：同行同列遠距，且中間恰一子
-      // 向右
-      for(let x=c+1;x<COLS;x++){
-        if (state.board[r][x]){ // 遇到第一個屏
-          for(let x2=x+1;x2<COLS;x2++){
-            if (state.board[r][x2]){ // 第二個棋
-              const b=state.board[r][x2];
-              if (b.revealed && b.color!==color && betweenCount(r,c,r,x2)===1){
-                res.push({from:{r,c}, to:{r:r,c:x2}});
-              }
-              break;
-            }
-          }
-          break;
-        }
-      }
-      // 向左
-      for(let x=c-1;x>=0;x--){
-        if (state.board[r][x]){
-          for(let x2=x-1;x2>=0;x2--){
-            if (state.board[r][x2]){
-              const b=state.board[r][x2];
-              if (b.revealed && b.color!==color && betweenCount(r,c,r,x2)===1){
-                res.push({from:{r,c}, to:{r:r,c:x2}});
-              }
-              break;
-            }
-          }
-          break;
-        }
-      }
-      // 向下
-      for(let y=r+1;y<ROWS;y++){
-        if (state.board[y][c]){
-          for(let y2=y+1;y2<ROWS;y++){
-            if (state.board[y2][c]){
-              const b=state.board[y2][c];
-              if (b.revealed && b.color!==color && betweenCount(r,c,y2,c)===1){
-                res.push({from:{r,c}, to:{r:y2,c:c}});
-              }
-              break;
-            }
-          }
-          break;
-        }
-      }
-      // 向上
-      for(let y=r-1;y>=0;y--){
-        if (state.board[y][c]){
-          for(let y2=y-1;y>=0;y2--){
-            if (state.board[y2][c]){
-              const b=state.board[y2][c];
-              if (b.revealed && b.color!==color && betweenCount(r,c,y2,c)===1){
-                res.push({from:{r,c}, to:{r:y2,c:c}});
-              }
-              break;
-            }
-          }
-          break;
-        }
-      }
-    }
-    return res;
-  }
-
-  function inBoard(r,c){ return r>=0 && r<ROWS && c>=0 && c<COLS }
-
-  function isMyTurnPiece(p){
-    if (!colorsAssigned) return true;
-    return p.color === state.turn;
-  }
-
-  function nextTurn(){
-    // 結束本方回合 → 切換顏色
-    if (!colorsAssigned){
-      // 不會進到這裡
-      return;
-    }
-    state.turn = (state.turn==='R' ? 'B':'R');
-    state.selected = null;
-    chainCtx = null;
-    ui.btnEndChain.style.display = 'none';
-
-    // 勝負 / 和局 檢查
-    checkEnd();
-
-    // 顯示訊息
-    if (!state.winner){
-      const mover = getMover();
-      setTurnInfo( mover==='human' ? '輪到你' : '輪到 AI…');
-      renderAll();
-
-      // AI 行動
-      if (currentSideToMoveIsAI()){
-        setTimeout(aiMove, 180);
-      }
-    }
+    // 單步規則：吃完就換手
+    nextTurn();
   }
 
   // --- AI ---
-  function aiMove(){
-    if (state.winner) return;
-    // 生成所有行動：翻子 / 移動 / 吃子
+  function aiMove(){ showThinking(true);
+    if (state.winner) { showThinking(false); return; }
     const color = state.turn;
     const moves = generateAllActions(color);
-
-    // 沒有行動 → 當場負（理論上除非全盤全翻且被困）
     if (moves.length===0){
       state.winner = (color==='R'?'B':'R');
       setTurnInfo(`AI 無法行棋，${state.winner==='R'?'紅':'黑'}勝`);
-      renderAll();
-      return;
+      renderAll(); showThinking(false); return;
     }
-
     let best = null;
-
-    if (aiLevel===0){
-      // 快速：啟發式優先序
-      best = pickByHeuristic(moves, color);
-    } else {
-      // 強 / 專家：淺層極大極小（專家多一層）
+    if (aiLevel===0){ best = pickByHeuristic(moves, color); }
+    else{
       const depth = (aiLevel===1)? 2 : 3;
       const {move} = searchBest(state, depth, color, -1e9, 1e9);
       best = move || pickByHeuristic(moves, color);
     }
-
-    // 執行
-    applyAction(best, true, null, true);
+    applyAction(best, true);
   }
 
   function generateAllActions(color){
     const acts = [];
-    // 1) 翻子（任何暗棋）
-    const darks = darkSquares();
-    for (const d of darks) acts.push({kind:'flip', r:d.r, c:d.c});
-
-    // 2) 移動 / 吃子
+    // 翻子
+    for (const d of darkSquares()) acts.push({kind:'flip', r:d.r, c:d.c});
+    // 移動/吃子
     for (let r=0;r<ROWS;r++) for(let c=0;c<COLS;c++){
       const a = state.board[r][c];
       if (!a || !a.revealed || a.color!==color) continue;
-      // 移動一格（四鄰空格）
       const dirs = [[1,0],[-1,0],[0,1],[0,-1]];
       for(const [dr,dc] of dirs){
-        const nr=r+dr, nc=c+dc;
-        if (!inBoard(nr,nc)) continue;
+        const nr=r+dr, nc=c+dc; if (!inBoard(nr,nc)) continue;
         const b = state.board[nr][nc];
-        if (!b){
-          acts.push({kind:'move', from:{r,c}, to:{r:nr,c:nc}});
-        } else if (b.revealed && b.color!==color && canCapture(r,c,nr,nc)){
-          acts.push({kind:'capture', from:{r,c}, to:{r:nr,c:nc}});
-        }
+        if (!b) acts.push({kind:'move', from:{r,c}, to:{r:nr,c:nc}});
+        else if (b.revealed && b.color!==color && canCapture(r,c,nr,nc)) acts.push({kind:'capture', from:{r,c}, to:{r:nr,c:nc}});
       }
-      // 炮遠距吃
       if (state.board[r][c].type==='C'){
         const caps = legalCapturesFrom(r,c,color);
         for (const m of caps) acts.push({kind:'capture', from:m.from, to:m.to});
@@ -821,348 +479,186 @@ bag.push(...mk(color,"P",5));
   }
 
   function pickByHeuristic(moves, color){
-    // 1) 首選安全大利吃子 → 2) 次選普通吃子 → 3) 中央翻子 → 4) 就近移動
-    const opp = color==='R'?'B':'R';
-    // 簡單分數
     function score(act){
       if (act.kind==='capture'){
         const a = pieceAt(act.from.r, act.from.c);
         const b = pieceAt(act.to.r, act.to.c);
-        const gain = PIECE_VALUES[b.type] - Math.floor(PIECE_VALUES[a.type]*0.85); // 視作可能被換回
-        // 續吃潛力
-        const nexts = legalCapturesFrom(act.to.r, act.to.c, color);
-        return 10000 + gain + nexts.length*40;
+        const gain = PIECE_VALUES[b.type] - Math.floor(PIECE_VALUES[a.type]*0.85);
+        return 10000 + gain;
       }
       if (act.kind==='move'){
-        // 趨中
-        const centerBias = 20 - manhattan(act.to.r,act.to.c, 1.5,3.5);
-        return centerBias;
+        const centerBias = 20 - manhattan(act.to.r,act.to.c, 1.5,3.5); return centerBias;
       }
       if (act.kind==='flip'){
-        // 翻中心位置
-        const centerBias = 14 - manhattan(act.r,act.c,1.5,3.5);
-        return 5 + centerBias;
+        const centerBias = 14 - manhattan(act.r,act.c,1.5,3.5); return 5 + centerBias;
       }
       return 0;
     }
     let best=moves[0], bestS=-1e9;
-    for (const m of moves){
-      const s = score(m);
-      if (s>bestS){bestS=s; best=m;}
-    }
+    for (const m of moves){ const s=score(m); if (s>bestS){bestS=s; best=m;} }
     return best;
   }
 
   function searchBest(s0, depth, color, alpha, beta){
-    // 簡化版：對 flip 不展開隨機，只給小啟發；對 capture 嘗試一手「貪婪連吃」評估
     const moves = generateAllActions(color);
     let best = null, bestVal = -1e9;
-
     for (const m of moves){
       const snap = snapshot(s0);
-      applyAction(m, false, snap, /*forAI*/true);
-      // 若是 capture，試著貪婪續吃
-      if (m.kind==='capture'){
-        greedyChainOnce(snap, color);
-      }
+      applyAction(m, false, snap);
       let val;
-      if (depth<=1){
-        val = evaluate(snap, color);
-      } else {
-        // 對手回合
+      if (depth<=1){ val = evaluate(snap, color); }
+      else {
         const opp = color==='R'?'B':'R';
         const res = searchBest(snap, depth-1, opp, -beta, -alpha);
         val = -res.value;
       }
-      if (val>bestVal){bestVal=val; best=m}
+      if (val>bestVal){ bestVal=val; best=m }
       alpha = Math.max(alpha, val);
       if (alpha>=beta) break;
     }
     return {move:best, value:bestVal};
   }
 
-  function greedyChainOnce(snap, color){
-    // 盡量讓同一子連吃（只做一輪直到不能吃）
-    let changed=true;
-    let safety=0;
-    while(changed && safety<12){
-      changed=false; safety++;
-      outer: for (let r=0;r<ROWS;r++) for(let c=0;c<COLS;c++){
-        const p = snap.board[r][c];
-        if (!p || p.color!==color || !p.revealed) continue;
-        const caps = legalCapturesFromSnap(snap,r,c,color);
-        if (caps.length>0){
-          const best = caps.map(m=>{
-            const target = snap.board[m.to.r][m.to.c];
-            return {m, val: PIECE_VALUES[target.type]};
-          }).sort((a,b)=>b.val-a.val)[0];
-          // 執行這一步
-          applyCaptureOnSnap(snap, best.m.from.r, best.m.from.c, best.m.to.r, best.m.to.c);
-          changed=true;
-          break outer;
-        }
-      }
-    }
-  }
-
-  function legalCapturesFromSnap(snap,r,c,color){
-    // 與 legalCapturesFrom 相同，但使用 snap.state
-    const saved = state; state = snap;
-    const res = legalCapturesFrom(r,c,color);
-    state = saved;
-    return res;
-  }
-
-  // --- 評估 ---
+  // 評估
   function evaluate(snap, povColor){
-    // 物質差 + 機動性 + 中央性 + 暗棋資訊
     let matR=0, matB=0, mobR=0, mobB=0, centR=0, centB=0;
-    for (let r=0;r<ROWS;r++) for(let c=0;c<COLS;c++){
-      const p = snap.board[r][c];
-      if (!p) continue;
+    for (let r=0;r<ROWS;r++) for (let c=0;c<COLS;c++){
+      const p = snap.board[r][c]; if (!p) continue;
       const side = (p.color==='R') ? {mat:()=>matR+=PIECE_VALUES[p.type], cent:()=>centR+=centerScore(r,c)} : {mat:()=>matB+=PIECE_VALUES[p.type], cent:()=>centB+=centerScore(r,c)};
       if (p.revealed){ side.mat(); side.cent(); }
     }
-    // 簡單機動性：可吃步數 + 可走步數
     function mobility(color){
-      const saved = state; state = snap;
-      const acts = generateAllActions(color);
-      state = saved;
-      // 吃子加權較高
+      const saved = state; state = snap; const acts = generateAllActions(color); state = saved;
       let eat = acts.filter(a=>a.kind==='capture').length;
       let move = acts.filter(a=>a.kind==='move').length;
       return eat*6 + move*1;
     }
     mobR = mobility('R'); mobB = mobility('B');
-
     const val = (matR-matB) + 0.12*(mobR-mobB) + 0.08*(centR-centB) + flipHeuristic(snap,povColor);
     return (povColor==='R') ? val : -val;
   }
   function centerScore(r,c){ return 12 - manhattan(r,c,1.5,3.5) }
   function manhattan(r,c, r2,c2){ return Math.abs(r-r2)+Math.abs(c-c2) }
-  function flipHeuristic(snap, color){
-    // 暗棋越多 → 資訊價值偏正；鼓勵翻子（輕微）
-    let dark=0; for (let r=0;r<ROWS;r++) for(let c=0;c<COLS;c++){ const p=snap.board[r][c]; if (p && !p.revealed) dark++; }
-    return Math.min(40, dark*0.8);
-  }
+  function flipHeuristic(snap, color){ let dark=0; for (let r=0;r<ROWS;r++) for(let c=0;c<COLS;c++){ const p=snap.board[r][c]; if (p && !p.revealed) dark++; } return Math.min(40, dark*0.8); }
 
-  // --- 套用動作（實/模擬） ---
-  function applyAction(act, real=false, snap=null, forAI=false){
+  // 動作套用
+  function applyAction(act, real=false, snap=null){
     const S = snap || state;
     if (act.kind==='flip'){
-      const p = S.board[act.r][act.c];
-      if (p && !p.revealed){ p.revealed=true; S.quiet=0; if(real) pushHistory({kind:'flip', r:act.r, c:act.c, piece:p}); }
-      if (real){
-        renderAll();
-        nextTurn();
-      }
+      const p = S.board[act.r][act.c]; if (p && !p.revealed){ p.revealed=true; S.quiet=0; if(real) pushHistory({kind:'flip', r:act.r, c:act.c, piece:p}); }
+      if (real){ renderAll(); nextTurn(); }
       return;
     }
     if (act.kind==='move'){
-      const a = S.board[act.from.r][act.from.c];
-      if (!a) return;
-      S.board[act.to.r][act.to.c] = {...a, r:act.to.r, c:act.to.c};
-      S.board[act.from.r][act.from.c] = null;
-      S.quiet++;
-      if (real){ pushHistory({kind:'move', from:act.from, to:act.to, piece:S.board[act.to.r][act.to.c]}); renderAll(); nextTurn(); }
+      const a = S.board[act.from.r][act.from.c]; if (!a) return;
+      S.board[act.to.r][act.to.c] = {...a, r:act.to.r, c:act.to.c}; S.board[act.from.r][act.from.c] = null; S.quiet++; if (real){ pushHistory({kind:'move', from:act.from, to:act.to, piece:S.board[act.to.r][act.to.c]}); renderAll(); nextTurn(); }
       return;
     }
     if (act.kind==='capture'){
       if (snap){ applyCaptureOnSnap(S, act.from.r, act.from.c, act.to.r, act.to.c); return; }
-      doCapture(act.from.r, act.from.c, act.to.r, act.to.c, false, forAI ? 'ai' : 'human');
+      doCapture(act.from.r, act.from.c, act.to.r, act.to.c, false);
     }
   }
-
   function applyCaptureOnSnap(S, r1,c1,r2,c2){
     const a=S.board[r1][c1], b=S.board[r2][c2];
-    S.board[r2][c2] = {...a, r:r2, c:c2};
-    S.board[r1][c1] = null;
-    (b.color==='R'?S.capturedR:S.capturedB).push(b);
-    S.quiet=0;
+    S.board[r2][c2] = {...a, r:r2, c:c2}; S.board[r1][c1] = null; (b.color==='R'?S.capturedR:S.capturedB).push(b); S.quiet=0;
   }
-
-  function snapshot(s){
-    // 深拷貝必要欄位
-    return {
-      board: s.board.map(row=> row.map(p=> p? {...p}:null )),
-      turn: s.turn,
-      bottomColor: s.bottomColor,
-      topColor: s.topColor,
-      selected: s.selected? {...s.selected}:null,
-      history: [], // 不用
-      capturedR: s.capturedR.map(x=>({...x})),
-      capturedB: s.capturedB.map(x=>({...x})),
-      quiet: s.quiet,
-      winner: s.winner,
-      firstMover: s.firstMover
-    };
-  }
-
+  function snapshot(s){ return { board: s.board.map(row=> row.map(p=> p? {...p}:null )), turn:s.turn, bottomColor:s.bottomColor, topColor:s.topColor, selected:s.selected? {...s.selected}:null, history:[], capturedR:s.capturedR.map(x=>({...x})), capturedB:s.capturedB.map(x=>({...x})), quiet:s.quiet, winner:s.winner, firstMover:s.firstMover }; }
   function pieceAt(r,c){ return state.board[r][c]; }
-
   function pushHistory(h){ state.history.push(h) }
 
-  // --- 勝負與和局檢查 ---
+  // 勝負/和局
   function checkEnd(){
     if (state.winner) return;
     const aliveR = countAlive('R'), aliveB = countAlive('B');
-    if (aliveR===0 || aliveB===0){
-      state.winner = (aliveR===0)? 'B':'R';
-      setTurnInfo(`${state.winner==='R'?'紅':'黑'}勝（全殲）`);
-      renderAll();
-      return;
-    }
-    if (state.quiet >= MAX_QUIET){
-      state.winner = 'D';
-      setTurnInfo('和局（50手無吃無翻）');
-      renderAll();
-      return;
-    }
-    // 無法行棋（全翻且無合法移動）
-    const darks = darkSquares();
-    const hasMoves = generateAllActions(state.turn).length>0;
-    if (darks.length===0 && !hasMoves){
-      state.winner = (state.turn==='R'?'B':'R');
-      setTurnInfo(`${state.winner==='R'?'紅':'黑'}勝（對方無法行棋）`);
-      renderAll();
-      return;
-    }
+    if (aliveR===0 || aliveB===0){ state.winner = (aliveR===0)? 'B':'R'; setTurnInfo(`${state.winner==='R'?'紅':'黑'}勝（全殲）`); renderAll(); return; }
+    if (state.quiet >= MAX_QUIET){ state.winner = 'D'; setTurnInfo('和局（50手無吃無翻）'); renderAll(); return; }
+    const darks = darkSquares(); const hasMoves = generateAllActions(state.turn).length>0;
+    if (darks.length===0 && !hasMoves){ state.winner = (state.turn==='R'?'B':'R'); setTurnInfo(`${state.winner==='R'?'紅':'黑'}勝（對方無法行棋）`); renderAll(); return; }
   }
-
   function countAlive(color){
-    let n=0;
-    for (let r=0;r<ROWS;r++) for (let c=0;c<COLS;c++){
-      const p = state.board[r][c];
-      if (p && p.color===color) n++;
-    }
-    return n;
+    let n=0; for (let r=0;r<ROWS;r++) for (let c=0;c<COLS;c++){ const p = state.board[r][c]; if (p && p.color===color) n++; } return n;
   }
 
-  // --- 畫面 ---
-  function renderAll(initial=false){
-    renderBoard();
-    renderCaptured();
-    if (initial) renderNames();
-  }
-
-  function renderNames(){
-    // 顏色標籤
-    const topClr = state.topColor, botClr = state.bottomColor;
-    ui.topName.style.color = topClr==='R'? 'var(--red)':'var(--black)';
-    ui.botName.style.color = botClr==='R'? 'var(--red)':'var(--black)';
-  }
-
+  // 畫面
+  function renderAll(initial=false){ renderBoard(); renderCaptured(); if (initial) renderNames(); }
+  function renderNames(){ ui.topName.style.color = state.topColor==='R'? 'var(--red)':'var(--black)'; ui.botName.style.color = state.bottomColor==='R'? 'var(--red)':'var(--black)'; }
   function renderCaptured(){
-    function pack(list){
-      // 聚合同種類
-      const m = new Map();
-      for (const p of list){
-        const key = p.color+p.type;
-        m.set(key, (m.get(key)||0)+1);
-      }
-      const arr=[];
-      for(const [k,v] of m.entries()){
-        const color = k[0]==='R'?'R':'B';
-        const type = k[1];
-        arr.push({color,type,count:v});
-      }
-      // 排序：價值高在前
-      arr.sort((a,b)=> PIECE_VALUES[b.type]-PIECE_VALUES[a.type]);
-      return arr;
-    }
-    // 誰在上、誰在下：固定呈現（與顏色無關）
+    function pack(list){ const m = new Map(); for (const p of list){ const key=p.color+p.type; m.set(key,(m.get(key)||0)+1); }
+      const arr=[]; for(const [k,v] of m.entries()){ const color=k[0]==='R'?'R':'B'; const type=k[1]; arr.push({color,type,count:v}); } arr.sort((a,b)=> PIECE_VALUES[b.type]-PIECE_VALUES[a.type]); return arr; }
     const topTaken = (state.topColor==='R') ? state.capturedR : state.capturedB;
     const botTaken = (state.bottomColor==='R') ? state.capturedR : state.capturedB;
-
-    ui.topCaps.innerHTML = '';
-    for(const x of pack(topTaken)){
-      const el = document.createElement('div');
-      el.className = 'cap '+(x.color==='R'?'red':'black');
-      el.textContent = CN[x.color==='R'?'R':'B'][x.type];
-      const s = document.createElement('small'); s.textContent = '×'+x.count;
-      el.appendChild(s);
-      ui.topCaps.appendChild(el);
-    }
-    ui.botCaps.innerHTML = '';
-    for(const x of pack(botTaken)){
-      const el = document.createElement('div');
-      el.className = 'cap '+(x.color==='R'?'red':'black');
-      el.textContent = CN[x.color==='R'?'R':'B'][x.type];
-      const s = document.createElement('small'); s.textContent = '×'+x.count;
-      el.appendChild(s);
-      ui.botCaps.appendChild(el);
-    }
+    ui.topCaps.innerHTML=''; for(const x of pack(topTaken)){ const el=document.createElement('div'); el.className='cap '+(x.color==='R'?'red':'black'); el.textContent = CN[x.color==='R'?'R':'B'][x.type]; const s=document.createElement('small'); s.textContent='×'+x.count; el.appendChild(s); ui.topCaps.appendChild(el); }
+    ui.botCaps.innerHTML=''; for(const x of pack(botTaken)){ const el=document.createElement('div'); el.className='cap '+(x.color==='R'?'red':'black'); el.textContent = CN[x.color==='R'?'R':'B'][x.type]; const s=document.createElement('small'); s.textContent='×'+x.count; el.appendChild(s); ui.botCaps.appendChild(el); }
   }
-
   function renderBoard(){
     const cells = ui.board.children;
-    // 清除所有高亮
     for (const cell of cells) cell.classList.remove('sel','hint','target');
     for (let r=0;r<ROWS;r++) for (let c=0;c<COLS;c++){
-      const idx = r*COLS+c;
-      const cell = cells[idx];
-      cell.innerHTML=''; // 清空（保留 click listener）
-      const coord = document.createElement('div'); coord.className='coord'; coord.textContent=`${r},${c}`;
-      cell.appendChild(coord);
-
+      const idx = r*COLS+c; const cell = cells[idx]; cell.innerHTML='';
+      const coord = document.createElement('div'); coord.className='coord'; coord.textContent=`${r},${c}`; cell.appendChild(coord);
       const p = state.board[r][c];
       if (p){
         const k = document.createElement('div');
-        if (!p.revealed){
-          k.className = 'piece back';
-        } else {
-          k.className = 'piece revealed '+(p.color==='R'?'red':'black');
-          const lab = document.createElement('span'); lab.className='piece-label'; lab.textContent = (p.color==='R'? CN.R[p.type] : CN.B[p.type]) || p.type; const ab = document.createElement('small'); ab.className='piece-abbr'; ab.textContent = p.type; k.appendChild(lab); k.appendChild(ab);
-        }
+        if (!p.revealed){ k.className='piece back'; }
+        else { k.className='piece revealed '+(p.color==='R'?'red':'black'); const lab=document.createElement('span'); lab.className='piece-label'; lab.textContent = (p.color==='R'? CN.R[p.type] : CN.B[p.type]) || p.type; const ab=document.createElement('small'); ab.className='piece-abbr'; ab.textContent=p.type; k.appendChild(lab); k.appendChild(ab); }
         cell.appendChild(k);
       }
     }
-    // 已選擇與可行目標
     if (state.selected){
-      const {r,c} = state.selected;
-      const idx = r*COLS + c;
-      cells[idx].classList.add('sel');
-
+      const {r,c} = state.selected; const idx = r*COLS+c; cells[idx].classList.add('sel');
       const p = state.board[r][c];
       if (p && p.revealed){
-        // 提示：四鄰空格可走
         const dirs=[[1,0],[-1,0],[0,1],[0,-1]];
         for(const [dr,dc] of dirs){
           const nr=r+dr, nc=c+dc; if (!inBoard(nr,nc)) continue;
           const b = state.board[nr][nc];
           if (!b) cells[nr*COLS+nc].classList.add('hint');
-          else if (b.revealed && b.color!==p.color && canCapture(r,c,nr,nc)){
-            cells[nr*COLS+nc].classList.add('target');
-          }
+          else if (b.revealed && b.color!==p.color && canCapture(r,c,nr,nc)) cells[nr*COLS+nc].classList.add('target');
         }
-        // 炮遠距吃提示
-        if (isCannon(p)){
-          const caps = legalCapturesFrom(r,c,p.color);
-          for (const m of caps){
-            cells[m.to.r*COLS+m.to.c].classList.add('target');
-          }
-        }
+        if (isCannon(p)){ const caps = legalCapturesFrom(r,c,p.color); for (const m of caps){ cells[m.to.r*COLS+m.to.c].classList.add('target'); } }
       }
     }
   }
+  function legalCapturesFrom(r,c,color){
+    const res=[]; const a = state.board[r][c]; if(!a || a.color!==color) return res;
+    // 一般子四鄰
+    if (!isCannon(a)){
+      const dirs=[[1,0],[-1,0],[0,1],[0,-1]];
+      for(const [dr,dc] of dirs){ const nr=r+dr, nc=c+dc; if(!inBoard(nr,nc)) continue; const b=state.board[nr][nc]; if(b && b.revealed && b.color!==color && canCapture(r,c,nr,nc)) res.push({from:{r,c}, to:{r:nr,c:nc}}); }
+    } else {
+      // 炮遠吃
+      for(let x=c+1;x<COLS;x++){ if(state.board[r][x]){ for(let x2=x+1;x2<COLS;x2++){ if(state.board[r][x2]){ const b=state.board[r][x2]; if (b.revealed && b.color!==color && betweenCount(r,c,r,x2)===1) res.push({from:{r,c}, to:{r:r,c:x2}}); break; } } break; } }
+      for(let x=c-1;x>=0;x--){ if(state.board[r][x]){ for(let x2=x-1;x2>=0;x2--){ if(state.board[r][x2]){ const b=state.board[r][x2]; if (b.revealed && b.color!==color && betweenCount(r,c,r,x2)===1) res.push({from:{r,c}, to:{r:r,c:x2}}); break; } } break; } }
+      for(let y=r+1;y<ROWS;y++){ if(state.board[y][c]){ for(let y2=y+1;y2<ROWS;y2++){ if(state.board[y2][c]){ const b=state.board[y2][c]; if (b.revealed && b.color!==color && betweenCount(r,c,y2,c)===1) res.push({from:{r,c}, to:{r:y2,c:c}}); break; } } break; } }
+      for(let y=r-1;y>=0;y--){ if(state.board[y][c]){ for(let y2=y-1;y2>=0;y2--){ if(state.board[y2][c]){ const b=state.board[y2][c]; if (b.revealed && b.color!==color && betweenCount(r,c,y2,c)===1) res.push({from:{r,c}, to:{r:y2,c:c}}); break; } } break; } }
+    }
+    return res;
+  }
+  function inBoard(r,c){ return r>=0 && r<ROWS && c>=0 && c<COLS }
 
-  function highlightTargets(list){
-    const cells = ui.board.children;
-    for (const cell of cells) cell.classList.remove('target');
-    for (const t of list){
-      cells[t.r*COLS+t.c].classList.add('target');
+  function setTurnInfo(msg){ ui.turnInfo.textContent = msg }
+  function blinkInfo(msg){ setTurnInfo(msg); ui.turnInfo.animate([{opacity:0.3},{opacity:1}],{duration:260,iterations:2}); }
+
+  function nextTurn(){
+    state.turn = (state.turn==='R' ? 'B' : 'R');
+    state.selected = null;
+    showThinking(false);
+    checkEnd();
+    if (!state.winner){
+      const mover = getMover();
+      setTurnInfo( mover==='human' ? '輪到你' : 'AI 思考中…' );
+      showThinking(mover!=='human');
+      renderAll();
+      if (currentSideToMoveIsAI()){ setTimeout(aiMove, 220); }
     }
   }
 
-  function setTurnInfo(msg){ ui.turnInfo.textContent = msg }
-  function blinkInfo(msg){
-    setTurnInfo(msg);
-    ui.turnInfo.animate([{opacity:0.3},{opacity:1}],{duration:260,iterations:2});
-  }
+  // 啟動
+  function init(){ buildUI(); newGame(); }
+  function renderNames(){ ui.topName.style.color = state.topColor==='R'? 'var(--red)':'var(--black)'; ui.botName.style.color = state.bottomColor==='R'? 'var(--red)':'var(--black)'; }
 
-  // --- 啟動 ---
-  buildUI();
-  newGame();
+  init();
 })();
 </script>
 </body>
