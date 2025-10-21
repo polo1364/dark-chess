@@ -242,14 +242,14 @@
     // 建立32子：紅黑各16
     const bag = [];
     ["R","B"].forEach(color=>{
-      bag.push(mk(color,"G",1));
-      bag.push(mk(color,"A",2));
-      bag.push(mk(color,"E",2));
-      bag.push(mk(color,"R",2));
-      bag.push(mk(color,"N",2));
-      bag.push(mk(color,"C",2));
-      bag.push(mk(color,"P",5));
-    });
+      bag.push(...mk(color,"G",1));
+bag.push(...mk(color,"A",2));
+bag.push(...mk(color,"E",2));
+bag.push(...mk(color,"R",2));
+bag.push(...mk(color,"N",2));
+bag.push(...mk(color,"C",2));
+bag.push(...mk(color,"P",5));
+});
     // 洗牌佈局
     shuffle(bag);
     const board = Array.from({length:ROWS},()=>Array(COLS).fill(null));
