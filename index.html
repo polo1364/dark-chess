@@ -708,7 +708,91 @@
   // 輔助：生成/搜尋會用到
   function manhattan(r,c, r2,c2){ return Math.abs(r-r2)+Math.abs(c-c2) }
 
-  init();
+  
+  // ---- 補齊：AI 及規則所需的工具 ----
+  function pieceAt(r,c){ try { return state.board[r][c]; } catch(e){ return null; } }
+
+  // 炮的隔子吃 & 一般相鄰吃的枚舉（僅回傳可吃目標）
+  function legalCapturesFrom(r,c,color){
+    const res=[]; const a = state.board[r][c]; if (!a || !a.revealed || a.color!==color) return res;
+    const dirs = [[1,0],[-1,0],[0,1],[0,-1]];
+    // 一般相鄰吃
+    for(const [dr,dc] of dirs){
+      const nr=r+dr, nc=c+dc; if (!inBoard(nr,nc)) continue;
+      const b = state.board[nr][nc];
+      if (b && b.revealed && b.color!==color && canCapture(r,c,nr,nc)) res.push({from:{r,c}, to:{r:nr,c:nc}});
+    }
+    // 炮隔子吃
+    if (a.type==='C'){
+      // 右
+      for (let x=c+1; x<COLS; x++){ if (state.board[r][x]) { 
+        for (let x2=x+1; x2<COLS; x2++){ if (state.board[r][x2]){
+          const b = state.board[r][x2];
+          if (b.revealed && b.color!==color && betweenCount(r,c,r,x2)===1) res.push({from:{r,c}, to:{r:r,c:x2}});
+          break;
+        }} break; } }
+      // 左
+      for (let x=c-1; x>=0; x--){ if (state.board[r][x]) { 
+        for (let x2=x-1; x2>=0; x2--){ if (state.board[r][x2]){
+          const b = state.board[r][x2];
+          if (b.revealed && b.color!==color && betweenCount(r,c,r,x2)===1) res.push({from:{r,c}, to:{r:r,c:x2}});
+          break;
+        }} break; } }
+      // 下
+      for (let y=r+1; y<ROWS; y++){ if (state.board[y][c]) { 
+        for (let y2=y+1; y2<ROWS; y2++){ if (state.board[y2][c]){
+          const b = state.board[y2][c];
+          if (b.revealed && b.color!==color && betweenCount(r,c,y2,c)===1) res.push({from:{r,c}, to:{r:y2,c:c}});
+          break;
+        }} break; } }
+      // 上
+      for (let y=r-1; y>=0; y--){ if (state.board[y][c]) { 
+        for (let y2=y-1; y2>=0; y2--){ if (state.board[y2][c]){
+          const b = state.board[y2][c];
+          if (b.revealed && b.color!==color && betweenCount(r,c,y2,c)===1) res.push({from:{r,c}, to:{r:y2,c:c}});
+          break;
+        }} break; } }
+    }
+    return res;
+  }
+
+  // 產生所有合法動作（翻子 / 一步移動 / 吃，包括炮隔吃），並做基本排序（吃子優先）
+  function generateAllActions(color){
+    const acts = [];
+    // 翻子
+    for (const d of darkSquares()) acts.push({kind:'flip', r:d.r, c:d.c});
+    // 移動/吃
+    for (let r=0;r<ROWS;r++) for (let c=0;c<COLS;c++){
+      const a = state.board[r][c]; if (!a || !a.revealed || a.color!==color) continue;
+      const dirs = [[1,0],[-1,0],[0,1],[0,-1]];
+      for (const [dr,dc] of dirs){
+        const nr=r+dr, nc=c+dc; if (!inBoard(nr,nc)) continue;
+        const b = state.board[nr][nc];
+        if (!b) acts.push({kind:'move', from:{r,c}, to:{r:nr,c:nc}});
+        else if (b.revealed && b.color!==color && canCapture(r,c,nr,nc)) acts.push({kind:'capture', from:{r,c}, to:{r:nr,c:nc}});
+      }
+      if (a.type==='C'){
+        const caps = legalCapturesFrom(r,c,color);
+        for (const m of caps) acts.push({kind:'capture', from:m.from, to:m.to});
+      }
+    }
+    // 排序
+    for (const m of acts){
+      let s=0;
+      if (m.kind==='capture'){
+        const A = pieceAt(m.from?.r, m.from?.c), B = pieceAt(m.to?.r, m.to?.c);
+        s = 100000 + (B&&B.type?PIECE_VALUES[B.type]:0)*100 - (A&&A.type?PIECE_VALUES[A.type]:0);
+      } else if (m.kind==='move'){
+        s = 1000 + (12 - (Math.abs(m.to.r-1.5)+Math.abs(m.to.c-3.5)));
+      } else if (m.kind==='flip'){
+        s = 10 + (10 - (Math.abs(m.r-1.5)+Math.abs(m.c-3.5)));
+      }
+      m._order = s;
+    }
+    acts.sort((a,b)=> (b._order||0) - (a._order||0));
+    return acts;
+  }
+init();
 })();
 </script>
 </body>
