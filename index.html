@@ -490,7 +490,7 @@
       if (best) applyAction(best, true);
     } catch(e){
       console.error('AI error', e);
-      const ds = darkSquares(); if (ds.length){ const k=ds[Math.floor(Math.random()*ds.length)]; applyAction({kind:'flip', r:k.r, c:k.c}, true); } else { nextTurn(); }
+      try { const ds = darkSquares(); if (ds.length){ const k=ds[Math.floor(Math.random()*ds.length)]; applyAction({kind:'flip', r:k.r, c:k.c}, true); } else { nextTurn(); } } catch(_) { nextTurn(); }
     } finally { showThinking(false); }
   }
 
@@ -713,3 +713,5 @@
 </script>
 </body>
 </html>
+  function pieceAt(r,c){ try { return state.board[r][c]; } catch(e){ return null; } }
+
