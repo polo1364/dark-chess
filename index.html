@@ -584,7 +584,7 @@ bag.push(...mk(color,"P",5));
     nextTurn();
   }
 
-  function doCapture(r1,c1,r2,c2, isChain){
+  function doCapture(r1,c1,r2,c2, isChain, actor='human'){
     const a = state.board[r1][c1], b = state.board[r2][c2];
     if (!a || !b) return;
     if (!canCapture(r1,c1,r2,c2)) return;
@@ -606,10 +606,37 @@ bag.push(...mk(color,"P",5));
     // 連吃檢查（同一子）
     const more = legalCapturesFrom(r2,c2, state.board[r2][c2].color);
     if (more.length>0){
-      chainCtx = {r:r2, c:c2, color: state.board[r2][c2].color};
-      ui.btnEndChain.style.display = 'inline-block';
-      highlightTargets(more.map(m=>m.to));
-      setTurnInfo('可連吃：點擊高亮目標或按「結束連吃」結束回合');
+      if (actor==='ai'){
+        // AI 自動連吃：每次選擇價值最高的目標，直到不能吃
+        ui.btnEndChain.style.display = 'none';
+        let safety = 0;
+        let curR = r2, curC = c2;
+        while (safety++ < 16){
+          const opts = legalCapturesFrom(curR, curC, state.board[curR][curC].color);
+          if (opts.length===0) break;
+          // 挑最高價值的吃法
+          let best = null, bestVal = -1e9;
+          for (const m of opts){
+            const tgt = state.board[m.to.r][m.to.c];
+            const val = (tgt && tgt.type) ? PIECE_VALUES[tgt.type] : 0;
+            if (val>bestVal){ bestVal=val; best=m; }
+          }
+          if (!best) break;
+          // 執行下一段連吃（遞迴以重用記錄/動畫）
+          doCapture(curR, curC, best.to.r, best.to.c, true, 'ai');
+          // 更新當前座標
+          curR = best.to.r; curC = best.to.c;
+          // 若上一層已結束回合，停止
+          if (state.turn === (state.bottomColor==='R'?'B':'R')) break;
+        }
+        chainCtx = null;
+        nextTurn();
+      } else {
+        chainCtx = {r:r2, c:c2, color: state.board[r2][c2].color};
+        ui.btnEndChain.style.display = 'inline-block';
+        highlightTargets(more.map(m=>m.to));
+        setTurnInfo('可連吃：點擊高亮目標或按「結束連吃」結束回合');
+      }
     } else {
       chainCtx = null;
       ui.btnEndChain.style.display = 'none';
@@ -759,7 +786,7 @@ bag.push(...mk(color,"P",5));
     }
 
     // 執行
-    applyAction(best, true);
+    applyAction(best, true, null, true);
   }
 
   function generateAllActions(color){
@@ -942,7 +969,7 @@ bag.push(...mk(color,"P",5));
     }
     if (act.kind==='capture'){
       if (snap){ applyCaptureOnSnap(S, act.from.r, act.from.c, act.to.r, act.to.c); return; }
-      doCapture(act.from.r, act.from.c, act.to.r, act.to.c, false);
+      doCapture(act.from.r, act.from.c, act.to.r, act.to.c, false, forAI ? 'ai' : 'human');
     }
   }
 
