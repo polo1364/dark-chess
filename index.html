@@ -232,6 +232,14 @@
   // --- 工具與 UI ---
   function showModal(v){ document.getElementById('modal').style.display = v?'grid':'none'; }
   function showThinking(v){ const o=document.getElementById('aiOverlay'); if(!o) return; o.style.display = v? 'flex':'none'; }
+  function setName(el, text){
+    if (!el) return;
+    let tn = null;
+    for (const n of el.childNodes){ if (n.nodeType===3){ tn=n; break; } }
+    const s = text.endsWith(' ') ? text : (text+' ');
+    if (tn) tn.nodeValue = s; else el.insertBefore(document.createTextNode(s), el.firstChild);
+  }
+
   function setTurnInfo(msg){ ui.turnInfo.textContent = msg }
   function blinkInfo(msg){ setTurnInfo(msg); ui.turnInfo.animate([{opacity:0.3},{opacity:1}],{duration:260,iterations:2}); }
   function inBoard(r,c){ return r>=0 && r<ROWS && c>=0 && c<COLS }
@@ -309,7 +317,7 @@
     ui.mStartHuman.onclick = ()=> decideFirst('human');
     ui.mStartAI.onclick = ()=> decideFirst('ai');
     ui.mRoll.onclick = ()=> decideFirst(Math.random()<0.5 ? 'human' : 'ai');
-    ui.modeSel.onchange = (e)=> { gameMode = e.target.value; renderAll(); if (gameMode==='hva'){ui.topName.textContent='電腦 '; ui.botName.textContent='玩家 1 '} else {ui.topName.textContent='玩家 2 '; ui.botName.textContent='玩家 1 '} updateColorBadges(); }
+    ui.modeSel.onchange = (e)=> { gameMode = e.target.value; renderAll(); if (gameMode==='hva'){ setName(ui.topName,'電腦'); setName(ui.botName,'玩家 1'); } else { setName(ui.topName,'玩家 2'); setName(ui.botName,'玩家 1'); } updateColorBadges(); }
     ui.levelSel.onchange = (e)=> { aiLevel = +e.target.value }
   }
 
@@ -326,8 +334,8 @@
 
   function decideFirst(who){
     showModal(false);
-    if (gameMode==='hva'){ ui.topName.textContent = '電腦 '; ui.botName.textContent = '玩家 1 '; }
-    else { ui.topName.textContent = '玩家 2 '; ui.botName.textContent = '玩家 1 '; }
+    if (gameMode==='hva'){ setName(ui.topName,'電腦'); setName(ui.botName,'玩家 1'); }
+    else { setName(ui.topName,'玩家 2'); setName(ui.botName,'玩家 1'); }
     state.firstMover = who;
     logAdd(who==='human' ? '你先手：第一步請翻子決定持色' : 'AI 先手：AI 會先翻子決定持色', '系統');
     setTurnInfo( (who==='human') ? '你先手：請翻任一暗棋決定持色' : 'AI先手：AI 正在翻子…');
@@ -403,7 +411,7 @@
     const msg = (who==='human') ? `你翻到【${p.color==='R'?'紅':'黑'}${CN[p.color==='R'?'R':'B'][p.type]}】→ 你持【${state.bottomColor==='R'?'紅':'黑'}】；輪到對手`
                                 : `AI 翻到【${p.color==='R'?'紅':'黑'}${CN[p.color==='R'?'R':'B'][p.type]}】→ 你持【${state.bottomColor==='R'?'紅':'黑'}】；輪到你`;
     setTurnInfo(msg);
-    if (getMover()==='ai'){ setTimeout(aiMove, 220); showThinking(true); }
+    if (getMover()==='ai'){ setTimeout(aiMove, 220); showThinking(true); } else { showThinking(false); }
   }
 
   // --- 移動 / 吃 / 規則判定 ---
