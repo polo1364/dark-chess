@@ -107,6 +107,8 @@
     content:"暗"; font-family: inherit; color:#4b2e00; text-shadow:0 1px 0 #fff8; font-weight:900;
   }
   .piece.revealed{transform: translateY(-1px)}
+  .piece-label{position:relative; z-index:2; font-weight:900; font-size:1em; line-height:1;}
+  
   .sel{outline: 4px solid var(--sel); outline-offset: -4px}
   .hint{box-shadow: 0 0 0 3px var(--hint) inset, 0 0 0 2px #fff}
   .target{box-shadow: 0 0 0 3px var(--warn) inset, 0 0 0 2px #fff}
@@ -1073,7 +1075,7 @@
           k.className = 'piece back';
         } else {
           k.className = 'piece revealed '+(p.color==='R'?'red':'black');
-          k.textContent = CN[p.color==='R'?'R':'B'][p.type];
+          const lab = document.createElement('span'); lab.className='piece-label'; lab.textContent = (p.color==='R'? CN.R[p.type] : CN.B[p.type]) || p.type; k.appendChild(lab);
         }
         cell.appendChild(k);
       }
