@@ -408,7 +408,7 @@
   const RANK={G:7,A:6,E:5,R:4,N:3,C:2,P:1};
   const VAL={G:1000,A:320,E:260,R:520,N:360,C:420,P:110};
   const MAX_QUIET=50;
-  let state, colorsAssigned=false, gameMode='hva', aiLevel=1;
+  let state, colorsAssigned=false, gameMode='hva', aiLevel=1, aiTimer=null;
 
   const E=(id)=>document.getElementById(id);
   const show=(el,vis)=>{el.style.display=vis?'flex':'none'};
@@ -532,15 +532,27 @@
     state.topColor = (state.bottomColor==='R')?'B':'R';
     state.turn = (p.color==='R')?'B':'R';
     log(who==='human'?'你':'AI', `翻到【${p.color==='R'?'紅':'黑'}${CN[p.color==='R'?'R':'B'][p.type]}】；你持【${state.bottomColor==='R'?'紅':'黑'}】`);
-    draw(); setBadge(); E('turnInfo').textContent = who==='human'?'輪到對手':'輪到你'; ensureAI();
+    draw(); setBadge(); E('turnInfo').textContent = who==='human'?'輪到對手':'輪到你';
+    ensureAI(2000);
   }
-  function flip(r,c){ const p=state.board[r][c]; if(!p||p.revealed) return; p.revealed=true; state.quiet=0; log(side(),'翻開【'+(p.color==='R'?'紅':'黑')+CN[p.color==='R'?'R':'B'][p.type]+'】'); draw(); next(); ensureAI(); }
-  function move(r1,c1,r2,c2){ const a=state.board[r1][c1]; if(!a) return; state.board[r2][c2]={...a}; state.board[r1][c1]=null; state.sel=null; state.quiet++; log(side(),`移動【${a.color==='R'?'紅':'黑'}${CN[a.color==='R'?'R':'B'][a.type]}】至 (${r2},${c2})`); draw(); next(); ensureAI(); }
-  function capture(r1,c1,r2,c2){ const a=state.board[r1][c1], b=state.board[r2][c2]; if(!a||!b) return; const taken={...b}; state.board[r2][c2]={...a}; state.board[r1][c1]=null; (taken.color==='R'?state.capturedR:state.capturedB).push(taken); state.sel=null; state.quiet=0; log(side(),`以【${a.color==='R'?'紅':'黑'}${CN[a.color==='R'?'R':'B'][a.type]}】吃【${b.color==='R'?'紅':'黑'}${CN[b.color==='R'?'R':'B'][b.type]}】`); draw(); next(); ensureAI(); }
+  function flip(r,c){ const p=state.board[r][c]; if(!p||p.revealed) return; p.revealed=true; state.quiet=0; log(side(),'翻開【'+(p.color==='R'?'紅':'黑')+CN[p.color==='R'?'R':'B'][p.type]+'】'); draw(); next(); }
+  function move(r1,c1,r2,c2){ const a=state.board[r1][c1]; if(!a) return; state.board[r2][c2]={...a}; state.board[r1][c1]=null; state.sel=null; state.quiet++; log(side(),`移動【${a.color==='R'?'紅':'黑'}${CN[a.color==='R'?'R':'B'][a.type]}】至 (${r2},${c2})`); draw(); next(); }
+  function capture(r1,c1,r2,c2){ const a=state.board[r1][c1], b=state.board[r2][c2]; if(!a||!b) return; const taken={...b}; state.board[r2][c2]={...a}; state.board[r1][c1]=null; (taken.color==='R'?state.capturedR:state.capturedB).push(taken); state.sel=null; state.quiet=0; log(side(),`以【${a.color==='R'?'紅':'黑'}${CN[a.color==='R'?'R':'B'][a.type]}】吃【${b.color==='R'?'紅':'黑'}${CN[b.color==='R'?'R':'B'][b.type]}】`); draw(); next(); }
   const side=()=> getMover()==='human'?'你':(gameMode==='hva'?'AI':'對手');
 
+  function ensureAI(delay=2000){
+    if (gameMode!=='hva' || !colorsAssigned || state.winner) return false;
+    if (state.turn === state.bottomColor) return false; // player's turn
+    if (aiTimer){ clearTimeout(aiTimer); aiTimer=null; }
+    E('turnInfo').textContent = 'AI 思考中…';
+    show(E('thinking'), true);
+    aiTimer = setTimeout(()=>{ aiTimer=null; aiMove(); }, delay);
+    return true;
+  }
+
   function aiMove(){
-    show(E('thinking'),true);
+    if (aiTimer){ clearTimeout(aiTimer); aiTimer=null; }
+    show(E('thinking'), true);
     try{
       const acts=genActsS(state,state.turn);
       if(!acts.length){ const ds=darks(); if(ds.length){ const k=ds[Math.floor(Math.random()*ds.length)]; apply({kind:'flip',r:k.r,c:k.c},true); } else next(); return; }
@@ -582,8 +594,16 @@
   }
   const clone=(s)=>({board:s.board.map(r=>r.map(p=>p?{...p}:null)),turn:s.turn,bottomColor:s.bottomColor,topColor:s.topColor,sel:s.sel?{...s.sel}:null,capturedR:s.capturedR.map(x=>({...x})),capturedB:s.capturedB.map(x=>({...x})),quiet:s.quiet,winner:s.winner,firstMover:s.firstMover});
 
-  function ensureAI(){ if(gameMode==='hva'&&colorsAssigned&&!state.winner&&state.turn!==state.bottomColor){ setTimeout(aiMove,150); } }
-  function next(){ state.turn = (state.turn==='R'?'B':'R'); state.sel=null; endCheck(); if(!state.winner){ const mv=getMover(); E('turnInfo').textContent = mv==='human'?'輪到你':'AI 思考中…'; if(mv==='ai') setTimeout(aiMove,200); } }
+  function next(){
+    state.turn = (state.turn==='R'?'B':'R');
+    state.sel=null;
+    endCheck();
+    if(!state.winner){
+      const mv=getMover();
+      E('turnInfo').textContent = mv==='human'?'輪到你':'AI 思考中…';
+      if(mv==='ai') ensureAI(2000);
+    }
+  }
   function endCheck(){
     const alive=(col)=>{let n=0;for(let r=0;r<ROWS;r++)for(let c=0;c<COLS;c++){const p=state.board[r][c];if(p&&p.color===col)n++;}return n;};
     if(alive('R')===0||alive('B')===0){ state.winner=alive('R')===0?'B':'R'; return showEnd(`${state.winner==='R'?'紅':'黑'}勝（全殲）`); }
@@ -591,7 +611,7 @@
     const hasMoves = genActsS(state,state.turn).length>0; const ds=darks();
     if(ds.length===0 && !hasMoves){ state.winner=(state.turn==='R'?'B':'R'); return showEnd(`${state.winner==='R'?'紅':'黑'}勝（對方無法行棋）`); }
   }
-  const showEnd=(txt)=>{E('resultText').textContent=txt+' － 點新局再戰'; show(E('result'),true)};
+  const showEnd=(txt)=>{E('resultText').textContent=txt+' － 點新局再戰'; show(E('result'),true); show(E('thinking'),false); if(aiTimer){clearTimeout(aiTimer); aiTimer=null;} };
 
   function draw(init=false){
     const b=E('board').children;
@@ -618,7 +638,20 @@
 
   function resign(){ if(state.winner) return; const w=(state.turn==='R'?'B':'R'); state.winner=w; showEnd(`${w==='R'?'紅':'黑'}勝（認輸）`); }
 
-  function decideFirst(w){ state.firstMover=w; if(w==='ai'&&gameMode==='hva'){ E('turnInfo').textContent='AI 正在翻子…'; setTimeout(()=>{const ds=darks(); const k=ds[Math.floor(Math.random()*ds.length)]; firstFlip(k.r,k.c,'ai');},220);} else { E('turnInfo').textContent='你先手：翻任一枚暗棋'; } }
+  function decideFirst(w){
+    state.firstMover=w;
+    if(w==='ai'&&gameMode==='hva'){
+      E('turnInfo').textContent='AI 正在翻子…';
+      if (aiTimer){ clearTimeout(aiTimer); aiTimer=null; }
+      aiTimer = setTimeout(()=>{
+        aiTimer=null;
+        const ds=darks(); const k=ds[Math.floor(Math.random()*ds.length)];
+        firstFlip(k.r,k.c,'ai');
+      },2000);
+    } else {
+      E('turnInfo').textContent='你先手：翻任一枚暗棋';
+    }
+  }
   function init(){
     E('btnNew').onclick=newGame; E('btnNew2').onclick=()=>{show(E('result'),false); newGame();};
     E('btnResign').onclick=resign; E('btnRule').onclick=()=>alert('先手翻子決色｜每回合一動作（翻/移/吃）｜兵吃將、將不能吃兵｜炮隔一子吃｜50手無吃無翻和局');
@@ -632,4 +665,3 @@
 </script>
 </body>
 </html>
-
