@@ -88,7 +88,7 @@
     display:flex; align-items:center; justify-content:center; user-select:none;
   }
   .coord{position:absolute; font-size:10px; color:#00000055; top:4px; left:6px}
-  .piece{font-family: "Noto Sans TC","PingFang TC","Microsoft JhengHei","Heiti TC","Hiragino Sans GB","Hiragino Kaku Gothic ProN","Meiryo","Source Han Sans TC","Source Han Sans SC","Apple LiGothic","Segoe UI",system-ui,-apple-system,sans-serif;
+  .piece{position:relative; font-family: "Noto Sans TC","PingFang TC","Microsoft JhengHei","Heiti TC","Hiragino Sans GB","Hiragino Kaku Gothic ProN","Meiryo","Source Han Sans TC","Source Han Sans SC","Apple LiGothic","Segoe UI",system-ui,-apple-system,sans-serif;
     width: calc(100% - 10px); height: calc(100% - 10px);
     border-radius:999px; display:flex; align-items:center; justify-content:center;
     font-weight:900; font-size: clamp(16px, 4.3vw, 28px);
@@ -107,7 +107,8 @@
     content:"暗"; font-family: inherit; color:#4b2e00; text-shadow:0 1px 0 #fff8; font-weight:900;
   }
   .piece.revealed{transform: translateY(-1px)}
-  .piece-label{position:relative; z-index:2; font-weight:900; font-size:1.15em; line-height:1;}
+  .piece-label{position:relative; z-index:3; font-weight:900; font-size:1.2em; line-height:1; pointer-events:none; text-shadow:0 1px 0 #fff8, 0 0 2px #0001;}
+  .piece-abbr{position:absolute; right:6px; bottom:6px; font-size:.72em; font-weight:800; opacity:.85; background:#fff8; padding:1px 5px; border-radius:8px; border:1px solid #0001; z-index:4; pointer-events:none;}
   
   .sel{outline: 4px solid var(--sel); outline-offset: -4px}
   .hint{box-shadow: 0 0 0 3px var(--hint) inset, 0 0 0 2px #fff}
@@ -1075,7 +1076,7 @@
           k.className = 'piece back';
         } else {
           k.className = 'piece revealed '+(p.color==='R'?'red':'black');
-          const lab = document.createElement('span'); lab.className='piece-label'; lab.textContent = (p.color==='R'? CN.R[p.type] : CN.B[p.type]) || p.type; k.appendChild(lab);
+          const lab = document.createElement('span'); lab.className='piece-label'; lab.textContent = (p.color==='R'? CN.R[p.type] : CN.B[p.type]) || p.type; const ab = document.createElement('small'); ab.className='piece-abbr'; ab.textContent = p.type; k.appendChild(lab); k.appendChild(ab);
         }
         cell.appendChild(k);
       }

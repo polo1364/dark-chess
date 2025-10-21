@@ -97,10 +97,13 @@ MIT（保留作者與專案名稱即可自由使用／修改／再散布）。
 
 ## 📝 變更紀錄
 
+
+- 2025-10-21 10:57 — v1.0.2：翻開仍無字 → 加上 **字母備援標籤**、文字層 z-index 與 text-shadow、強制 `.piece` 置為 `position:relative`。
 - 2025-10-21 10:34 — v1.0.1：修正 **翻開無字** 的問題：改為以 `<span class="piece-label">` 呈現字形並設定 z-index，提升跨瀏覽器穩定度。
 
 
-## 🔧 一鍵打包（自動更新 README 版本與時間）
+## 🔧 發佈打包
+- 直接壓縮 `index.html` 與 `README.md` 為 `dark-chess-web.zip`（本專案為純前端，無需編譯）。
 - 需要 Python 3（本專案純前端）。
 - 執行：`python build.py`  
 - 作用：自動 **更新 README 的版本與時間**，並輸出 `dark-chess-web.zip`。
