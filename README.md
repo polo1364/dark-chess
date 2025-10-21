@@ -28,3 +28,13 @@ README.md
 - 直接開 `index.html` 即可；若看到舊版，加上 `?v=YYYYMMDDhhmm` 清快取。
 
 MIT License.
+
+## 🤖 本版 AI 強化
+- 迭代加深（依等級分別：約 0.35s / 0.9s / 1.8s 時控）
+- Alpha-Beta Negamax + **Transposition Table**
+- **Move Ordering**：MVV-LVA、中心偏好、Killer Moves、History Heuristic
+- **Quiescence Search**（持續展開吃子以避免地平線效應）
+- 永不卡思：到時保底出手（至少翻子），並自動關閉「AI 思考中…」
+- 等級 0/1/2 = 快速 / 強 / 專家（時間與深度同步提升）
+
+- 2025-10-21 13:32 — 強化 AI 搜索與評估，引入 TT、殺手著法、歷史啟發、安靜搜尋與時控。
