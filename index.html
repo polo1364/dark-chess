@@ -79,7 +79,7 @@
     position:relative; z-index:3; font-weight:900; font-size:1.35em; line-height:1;
     pointer-events:none;
     text-shadow:0 1px 0 #fff, 0 0 2px #0004, 0 2px 4px #0002;
-    -webkit-text-stroke: 1px #fff;
+    -webkit-text-stroke: 1px #fff; opacity:1;
     font-family:'DarkChessCJK', inherit;
   }
   .piece-abbr{position:absolute; right:6px; bottom:6px; font-size:.72em; font-weight:800; opacity:.85; background:#fff8; padding:1px 5px; border-radius:8px; border:1px solid #0001; z-index:4; pointer-events:none;}
@@ -362,6 +362,14 @@
     const humanColor = state.bottomColor;
     return (turnColor===humanColor) ? 'human' : 'ai';
   }
+  function isMyTurnPiece(p){
+    if (!p || !p.revealed) return false;
+    if (gameMode==='pvp') return p.color===state.turn;
+    if (!colorsAssigned) return false;
+    const humanTurn = (state.turn === state.bottomColor);
+    return humanTurn && (p.color === state.bottomColor);
+  }
+
 
   // --- 首翻 / 翻子 ---
   function aiActFirstFlip(){
@@ -436,23 +444,43 @@
   }
 
   // --- AI ---
-  function aiMove(){ showThinking(true);
-    if (state.winner) { showThinking(false); return; }
-    const color = state.turn;
-    const moves = generateAllActions(color);
-    if (moves.length===0){
-      state.winner = (color==='R'?'B':'R');
-      setTurnInfo(`AI 無法行棋，${state.winner==='R'?'紅':'黑'}勝`);
-      renderAll(); showThinking(false); return;
-    }
-    let best = null;
-    if (aiLevel===0){ best = pickByHeuristic(moves, color); }
-    else{
-      const depth = (aiLevel===1)? 2 : 3;
-      const {move} = searchBest(state, depth, color, -1e9, 1e9);
-      best = move || pickByHeuristic(moves, color);
-    }
-    applyAction(best, true);
+  function aiMove(){
+    showThinking(true);
+    try{
+      if (state.winner) return;
+      const color = state.turn;
+      let moves = generateAllActions(color);
+      if (!moves || moves.length===0){
+        const ds = darkSquares();
+        if (ds.length>0){
+          const pick = ds[Math.floor(Math.random()*ds.length)];
+          moves = [{kind:'flip', r:pick.r, c:pick.c}];
+        }
+      }
+      if (!moves || moves.length===0){
+        state.winner = (color==='R'?'B':'R');
+        setTurnInfo(`AI 無法行棋，${state.winner==='R'?'紅':'黑'}勝`);
+        renderAll();
+        return;
+      }
+      let best = null;
+      if (aiLevel===0){ best = pickByHeuristic(moves, color); }
+      else {
+        const depth = (aiLevel===1)? 2 : 3;
+        const {move} = searchBest(state, depth, color, -1e9, 1e9);
+        best = move || pickByHeuristic(moves, color);
+      }
+      applyAction(best, true);
+    } catch(e){
+      console.error('AI error', e);
+      const ds = darkSquares();
+      if (ds.length){
+        const k = ds[Math.floor(Math.random()*ds.length)];
+        applyAction({kind:'flip', r:k.r, c:k.c}, true);
+      } else {
+        nextTurn();
+      }
+    } finally { showThinking(false); }
   }
 
   function generateAllActions(color){

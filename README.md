@@ -43,3 +43,5 @@ dark-chess-web/
 MIT License.
 
 - 2025-10-21 13:04 — 補充：移除棋子英文字母、AI 覆蓋層不阻擋點擊、AI 增加失效保護避免卡住。
+
+- 2025-10-21 13:10 — 修正：補上 isMyTurnPiece；AI finally 收合覆蓋層；字體不透明。
