@@ -5,76 +5,401 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <title>象棋暗棋（翻翻棋）</title>
 <style>
-  body{margin:0;font-family:"Noto Sans TC",system-ui,-apple-system,sans-serif;background:#f6f3ee;color:#222;display:flex;justify-content:center}
-  .app{width:min(96vw,560px);padding:12px;display:flex;flex-direction:column;gap:10px}
-  .bar,.names,.log{background:#ffffffcc;border-radius:12px;box-shadow:0 8px 20px #0001, inset 0 0 0 1px #0001}
-  .bar{display:flex;gap:8px;align-items:center;justify-content:space-between;padding:10px;flex-wrap:wrap}
-  .names{display:grid;grid-template-columns:1fr auto;gap:8px;align-items:center;padding:10px}
-  .player{display:grid;grid-template-columns:1fr auto;gap:8px;align-items:center}
-  .name{font-weight:800}
-  .badge{display:inline-block;margin-left:6px;padding:2px 8px;border-radius:999px;font-size:12px;font-weight:800;color:#fff}
-  .badge.red{background:#c0392b}.badge.black{background:#2c3e50}
-  .captured{display:flex;gap:4px;flex-wrap:wrap;justify-content:flex-end;min-height:28px}
-  .cap{width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;border:2px solid #0002;background:#fff;font-weight:800}
-  .cap.red{color:#c0392b}.cap.black{color:#2c3e50}
-  .boardWrap{background:linear-gradient(115deg,#c49a6c,#9b7954);border-radius:16px;padding:12px;box-shadow:0 20px 40px #0003, inset 0 0 0 2px #0002}
-  .board{--cols:8;--rows:4;display:grid;grid-template-columns:repeat(var(--cols),1fr);gap:6px;aspect-ratio:8/4}
-  .cell{background:linear-gradient(#f8e7cc,#edd3a9);border-radius:10px;border:2px solid #4b3a29;position:relative;display:flex;align-items:center;justify-content:center}
-  .piece{width:calc(100% - 10px);height:calc(100% - 10px);border-radius:999px;display:flex;align-items:center;justify-content:center;border:3px solid #d4a44b;background:#fff;font-weight:900;box-shadow:0 6px 14px #0005}
-  .piece.back{background:linear-gradient(#ffe497,#e6b455);border-color:#a06a00;color:#4b2e00}
-  .piece.back::after{content:"暗";font-weight:900}
-  .piece.red{color:#c0392b}.piece.black{color:#2c3e50}
-  .label{font-size:1.3em;-webkit-text-stroke:1px #fff;text-shadow:0 1px 0 #fff,0 0 2px #0004,0 2px 4px #0002}
-  .sel{outline:4px solid #2ecc71;outline-offset:-4px}
-  .hint{box-shadow:0 0 0 3px #3498db inset,0 0 0 2px #fff}
-  .target{box-shadow:0 0 0 3px #e67e22 inset,0 0 0 2px #fff}
-  .log{padding:10px;height:120px;overflow:auto;font-size:12.5px}
-  .who{font-weight:800;margin-right:4px}
-  .footer{display:flex;justify-content:space-between;align-items:center;font-size:12px;opacity:.85}
-  button,select{border:1px solid #0002;border-radius:10px;background:#fff;padding:6px 10px}
-  .overlay{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,.28);z-index:9}
-  .panel{background:#fff;border-radius:14px;padding:14px 16px;box-shadow:0 20px 40px #0006;border:1px solid #0001;display:flex;gap:10px;align-items:center}
-  .spin{width:20px;height:20px;border-radius:50%;border:3px solid #e5e5e5;border-top-color:#0b84ff;animation:sp 1s linear infinite}
-  @keyframes sp{to{transform:rotate(360deg)}}
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: "Noto Sans TC", system-ui, -apple-system, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+  }
+  .app {
+    width: min(96vw, 680px);
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .header {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(10px);
+  }
+  .title {
+    font-size: 28px;
+    font-weight: 900;
+    text-align: center;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin: 0 0 16px 0;
+  }
+  .controls {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+  }
+  button, select {
+    border: none;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 10px 18px;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+  }
+  button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+  }
+  button:active {
+    transform: translateY(0);
+  }
+  select {
+    cursor: pointer;
+    appearance: none;
+    padding-right: 30px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='white' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+  }
+  .players {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  .player-card {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+  }
+  .player-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.25);
+  }
+  .player-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+  .player-name {
+    font-size: 18px;
+    font-weight: 800;
+    flex: 1;
+  }
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 800;
+    color: white;
+    min-width: 50px;
+  }
+  .badge.red { background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); }
+  .badge.black { background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); }
+  .badge.unknown { background: #e0e0e0; color: #666; }
+  .captured {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    min-height: 32px;
+  }
+  .cap {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    transition: transform 0.2s ease;
+  }
+  .cap:hover {
+    transform: scale(1.1);
+  }
+  .cap.red { 
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    color: white;
+  }
+  .cap.black { 
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    color: white;
+  }
+  .boardWrap {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 24px;
+    padding: 24px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(10px);
+  }
+  .board {
+    --cols: 8;
+    --rows: 4;
+    display: grid;
+    grid-template-columns: repeat(var(--cols), 1fr);
+    gap: 8px;
+    aspect-ratio: 8/4;
+  }
+  .cell {
+    background: linear-gradient(145deg, #f5f7fa 0%, #c3cfe2 100%);
+    border-radius: 12px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+  .cell:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+  }
+  .piece {
+    width: calc(100% - 12px);
+    height: calc(100% - 12px);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 900;
+    font-size: 1.4em;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+  }
+  .piece.back {
+    background: linear-gradient(135deg, #ffeaa7 0%, #fdcb6e 100%);
+    color: #2d3436;
+  }
+  .piece.back::after {
+    content: "暗";
+    font-weight: 900;
+  }
+  .piece.red {
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    color: white;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  }
+  .piece.black {
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    color: white;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  }
+  .sel {
+    outline: 5px solid #00b894;
+    outline-offset: -5px;
+    animation: pulse 1.5s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { outline-color: #00b894; }
+    50% { outline-color: #55efc4; }
+  }
+  .hint {
+    background: linear-gradient(145deg, #74b9ff 0%, #0984e3 100%);
+    box-shadow: 0 0 0 4px rgba(116, 185, 255, 0.3);
+  }
+  .target {
+    background: linear-gradient(145deg, #ff7675 0%, #d63031 100%);
+    box-shadow: 0 0 0 4px rgba(255, 118, 117, 0.3);
+    animation: targetPulse 1s ease-in-out infinite;
+  }
+  @keyframes targetPulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+  }
+  .info-panel {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(10px);
+  }
+  .turn-info {
+    font-size: 16px;
+    font-weight: 700;
+    text-align: center;
+    color: #2d3436;
+    margin-bottom: 16px;
+    padding: 12px;
+    background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+    border-radius: 12px;
+  }
+  .log {
+    height: 140px;
+    overflow-y: auto;
+    font-size: 13px;
+    line-height: 1.6;
+    color: #2d3436;
+  }
+  .log::-webkit-scrollbar {
+    width: 6px;
+  }
+  .log::-webkit-scrollbar-track {
+    background: #f1f3f5;
+    border-radius: 10px;
+  }
+  .log::-webkit-scrollbar-thumb {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 10px;
+  }
+  .log > div {
+    padding: 6px 0;
+    border-bottom: 1px solid #f1f3f5;
+  }
+  .log > div:last-child {
+    border-bottom: none;
+  }
+  .who {
+    font-weight: 800;
+    margin-right: 6px;
+    color: #667eea;
+  }
+  .footer {
+    text-align: center;
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.9);
+    font-weight: 600;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  }
+  .overlay {
+    position: fixed;
+    inset: 0;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(8px);
+    z-index: 999;
+  }
+  .panel {
+    background: white;
+    border-radius: 24px;
+    padding: 32px 40px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    animation: slideUp 0.3s ease;
+  }
+  @keyframes slideUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  .panel b {
+    font-size: 18px;
+    color: #2d3436;
+  }
+  .spin {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    border: 3px solid #e0e0e0;
+    border-top-color: #667eea;
+    animation: spin 0.8s linear infinite;
+  }
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+  @media (max-width: 600px) {
+    .title { font-size: 24px; }
+    .controls { gap: 8px; }
+    button, select { padding: 8px 14px; font-size: 13px; }
+    .players { grid-template-columns: 1fr; }
+    .boardWrap { padding: 16px; }
+    .board { gap: 6px; }
+  }
 </style>
 </head>
 <body>
 <div class="app">
-  <div class="bar">
-    <div>
-      <button id="btnNew">重新開始</button>
-      <button id="btnToss">擲骰決先手</button>
-      <select id="mode"><option value="hva">人機</option><option value="pvp">雙人</option></select>
-      <select id="level" title="AI 強度"><option value="0">快</option><option value="1" selected>強</option><option value="2">專家</option></select>
-    </div>
-    <div>
-      <button id="btnResign">認輸</button>
-      <button id="btnRule">規則</button>
+  <div class="header">
+    <h1 class="title">🎮 象棋暗棋</h1>
+    <div class="controls">
+      <button id="btnNew">🔄 重新開始</button>
+      <button id="btnToss">🎲 擲骰決先手</button>
+      <select id="mode">
+        <option value="hva">👤 人機對戰</option>
+        <option value="pvp">👥 雙人對戰</option>
+      </select>
+      <select id="level" title="AI 強度">
+        <option value="0">⚡ 快速</option>
+        <option value="1" selected>💪 強力</option>
+        <option value="2">🧠 專家</option>
+      </select>
+      <button id="btnResign">🏳️ 認輸</button>
+      <button id="btnRule">📖 規則</button>
     </div>
   </div>
 
-  <div class="names">
-    <div class="player"><div class="name" id="topName">玩家 2 <span id="topBadge" class="badge">？</span></div></div>
-    <div class="captured" id="topCaps"></div>
+  <div class="players">
+    <div class="player-card">
+      <div class="player-info">
+        <div class="player-name" id="topName">玩家 2</div>
+        <div id="topBadge" class="badge unknown">？</div>
+      </div>
+      <div class="captured" id="topCaps"></div>
+    </div>
+
+    <div class="player-card">
+      <div class="player-info">
+        <div class="player-name" id="botName">玩家 1</div>
+        <div id="botBadge" class="badge unknown">？</div>
+      </div>
+      <div class="captured" id="botCaps"></div>
+    </div>
   </div>
 
-  <div class="boardWrap"><div id="board" class="board"></div></div>
+  <div class="boardWrap">
+    <div id="board" class="board"></div>
+  </div>
 
-  <div id="log" class="log"></div>
-
-  <div class="names">
-    <div class="player"><div class="name" id="botName">玩家 1 <span id="botBadge" class="badge">？</span></div></div>
-    <div class="captured" id="botCaps"></div>
+  <div class="info-panel">
+    <div class="turn-info" id="turnInfo">先手未決：請翻子決定顏色</div>
+    <div id="log" class="log"></div>
   </div>
 
   <div class="footer">
-    <div id="turnInfo">先手未決：請翻子決定顏色</div>
-    <div>50 手無吃無翻判和｜點棋選擇/取消</div>
+    50 手無吃無翻判和 | 點棋選擇/取消 | 兵吃將 | 炮隔一子吃
   </div>
 </div>
 
-<div id="thinking" class="overlay"><div class="panel"><div class="spin"></div><b>AI 思考中…</b></div></div>
-<div id="result" class="overlay"><div class="panel"><b id="resultText">對局結束</b><button id="btnNew2">新局</button></div></div>
+<div id="thinking" class="overlay">
+  <div class="panel">
+    <div class="spin"></div>
+    <b>AI 思考中…</b>
+  </div>
+</div>
+
+<div id="result" class="overlay">
+  <div class="panel">
+    <b id="resultText">對局結束</b>
+    <button id="btnNew2">🎮 新局</button>
+  </div>
+</div>
 
 <script>
 (()=>{
@@ -88,7 +413,7 @@
   const E=(id)=>document.getElementById(id);
   const show=(el,vis)=>{el.style.display=vis?'flex':'none'};
   const log=(who,txt)=>{const d=document.createElement('div');d.innerHTML=`<span class="who">${who}：</span>${txt}`;E('log').appendChild(d);E('log').scrollTop=E('log').scrollHeight;}
-  const setBadge=()=>{const tb=E('topBadge'), bb=E('botBadge'); if(!colorsAssigned){tb.textContent='？';tb.className='badge';bb.textContent='？';bb.className='badge';return;} tb.textContent=state.topColor==='R'?'紅':'黑'; bb.textContent=state.bottomColor==='R'?'紅':'黑'; tb.className='badge '+(state.topColor==='R'?'red':'black'); bb.className='badge '+(state.bottomColor==='R'?'red':'black');};
+  const setBadge=()=>{const tb=E('topBadge'), bb=E('botBadge'); if(!colorsAssigned){tb.textContent='？';tb.className='badge unknown';bb.textContent='？';bb.className='badge unknown';return;} tb.textContent=state.topColor==='R'?'紅':'黑'; bb.textContent=state.bottomColor==='R'?'紅':'黑'; tb.className='badge '+(state.topColor==='R'?'red':'black'); bb.className='badge '+(state.bottomColor==='R'?'red':'black');};
 
   const inBoard=(r,c)=>r>=0&&r<ROWS&&c>=0&&c<COLS;
   const adj=(r1,c1,r2,c2)=>Math.abs(r1-r2)+Math.abs(c1-c2)===1;
@@ -188,8 +513,11 @@
     const r=+e.currentTarget.dataset.r, c=+e.currentTarget.dataset.c, p=state.board[r][c];
     if(!colorsAssigned){ if(p && !p.revealed) return firstFlip(r,c,'human'); E('turnInfo').textContent='請先翻子決定顏色'; return; }
     const sel=state.sel;
-    if(p && !p.revealed) return flip(r,c);
-    if(!sel){ if(p && myPiece(p)){ state.sel={r,c}; draw(); } return; }
+    if(!sel){ 
+      if(p && !p.revealed) return flip(r,c);
+      if(p && myPiece(p)){ state.sel={r,c}; draw(); } 
+      return; 
+    }
     if(sel.r===r&&sel.c===c){ state.sel=null; draw(); return; }
     const a=state.board[sel.r][sel.c];
     if(!p){ if(adj(sel.r,sel.c,r,c)) move(sel.r,sel.c,r,c); else E('turnInfo').textContent='只能橫直一步'; return; }
@@ -271,7 +599,7 @@
       const i=r*COLS+c; const cell=b[i]; cell.classList.remove('sel','hint','target'); cell.innerHTML='';
       const p=state.board[r][c]; if(!p) continue;
       const k=document.createElement('div'); k.className='piece '+(p.revealed?(p.color==='R'?'red':'black'):'back');
-      if(p.revealed){ const lab=document.createElement('span'); lab.className='label'; lab.textContent=(p.color==='R'?CN.R[p.type]:CN.B[p.type]); k.appendChild(lab); }
+      if(p.revealed){ const lab=document.createElement('span'); lab.textContent=(p.color==='R'?CN.R[p.type]:CN.B[p.type]); k.appendChild(lab); }
       cell.appendChild(k);
     }
     if(state.sel){ const {r,c}=state.sel; const idx=r*COLS+c; b[idx].classList.add('sel'); const a=state.board[r][c];
@@ -285,7 +613,7 @@
     const topCaps=E('topCaps'), botCaps=E('botCaps'); topCaps.innerHTML=''; botCaps.innerHTML='';
     for(const x of pack(top)){ const d=document.createElement('div'); d.className='cap '+(x.color==='R'?'red':'black'); d.textContent=(x.color==='R'?CN.R[x.type]:CN.B[x.type]); topCaps.appendChild(d); }
     for(const x of pack(bot)){ const d=document.createElement('div'); d.className='cap '+(x.color==='R'?'red':'black'); d.textContent=(x.color==='R'?CN.R[x.type]:CN.B[x.type]); botCaps.appendChild(d); }
-    if(init){ E('topName').style.color=state.topColor==='R'?'#c0392b':'#2c3e50'; E('botName').style.color=state.bottomColor==='R'?'#c0392b':'#2c3e50'; setBadge(); }
+    if(init){ setBadge(); }
   }
 
   function resign(){ if(state.winner) return; const w=(state.turn==='R'?'B':'R'); state.winner=w; showEnd(`${w==='R'?'紅':'黑'}勝（認輸）`); }
@@ -304,3 +632,4 @@
 </script>
 </body>
 </html>
+
